@@ -1,0 +1,144 @@
+This is the readme for the old text based level editor included
+with the source distribution. There is a graphic level editor
+available at the mulg home page.
+
+
+
+Howto create new levels for mulg?
+---------------------------------
+by Till Harbaum (t.harbaum@tu-bs.de)
+
+This is the purpose of makelevel. The DOS version of this program is part 
+of the mulg distribution. For other OS (like linux) the sources are
+in the package also. Under linux just type 'make makelevel' to get the
+executable. Makelevel is written with flex and bison. You'll need to have 
+these installed to compile makelevel (this may be a problem for Mac users).
+
+Makelevel converts a textual desciption of a mulg level database (*.lev) 
+into a real palmos database (*.pdb). The format of the lev-file is 
+in some parts close to a c-source file. The file may contain:
+
+- Comments: // this is a comment
+Comments are seperated by a double slash '//'. Everything in 
+a line following the double slash is ignored by makelevel.
+
+- Constant definitions: #define CONSTANT_NAME VALUE
+This command sets the constant named CONSTANT_NAME to the value VALUE.
+VALUE may be an integer expression using some of the standard c operations
+(math operations + - * /, binary operations & (and) | (or) and ~ (not),
+shift operations << (binary shift left) and >> (binary shift right). 
+Constants may be of decimal notation (e.g. 123) or hex notation (e.g.
+0x7b) or in binary notation (e.g. 0b01111011). The VALUE expression may
+contain previous defined constants as well. A more complex example:
+#define HALLO 0x2*(0b10000+4)
+#define TEST  HALLO>>1
+The constant HALLO is set to 20 (2*(16+4)) and TEST is set to 10 (20>>1).
+
+- Include statements: #include "test.h"
+This statement includes the contents of file given into the parsing process.
+This is for example used to input the tile constants in the file tiles.h
+into the level file.
+
+- Debug switch: dbdebug
+This option switches debug on. A debug database allows you to select any 
+level without having played the previous ones. A database created with
+this option has a trailing "(D)" appended to its name on the pilot.
+
+- Database name: dbname "I am a Mulg database"
+This statement sets the name of the database. This name is not the one
+used on the PC (in the PC its the same name as the .lev file was but
+with a .pdb suffix). This is the name your database will have on the
+pilot. Verify in the game the the filename is not too long to be
+displayed by mulg. The filename may have at most 31 characters.
+
+- Doc definitions: doc 1 "i am a document"
+This defines a doc for use with the DOC type tile. The doc is identified 
+by its number (1 in the above exmaple). The number must be at most 255.
+The doc string is formatted by mulg to fit into the doc display. Anyway,
+your doc may be too long to display properly, you should verify this.
+
+- Level definitions: 
+A level definition is of the form:
+
+level "name" { 
+CONSTANT CONSTANT ...
+CONSTANT CONSTANT ...
+CONSTANT CONSTANT ...
+...
+}
+
+This creates a level name 'name'. All lines must show the same number
+of constants in each line. This number will be the number of tile 
+columns of your level. One line of constants is one line of tiles
+io the level. You should choose the number of tiles that fills the
+hole screen (since one row/column is displayed for two neighbouring
+areas of a level the recommended number of rows is 9+n*8 with 
+0<=n<=3 and a number of columns of 10+n*9 with 0<=n<=3. This allows
+for a maximum level size of 37*33 tiles which gives a 4*4 screens
+level (like the 'The Maze' level in mulg.lev). 
+
+Every CONSTANT represents one tile (one square part of the game area). 
+Some of the simples tiles are 'STONE' and 'PATH'. Some more complex tiles 
+may have attributes. These attributes can be assigned to a constant 
+following a dot. The DOC tile for example needs to have a attribute 
+that indicates to which doc string the tile is connected. The constant 
+'DOC.1' for example refers to a document string created with a doc
+command like 'doc 1 "i am a doc message"'. Other examples for attributes
+are the connections between switches (SW) and doors (DOOR). DOOR.1 may
+be opened using swicth SW.1. You may define constants for attributes
+like #define ATTRIB_TEST 1. You can use this like DOOR.TEST which is
+the same a DOOR.1 in this example. Other examples for special tiles
+are START and GOAL which are the PATH tile you start on and the cross
+tile you have to go to. A level must have exactly one START and at least 
+one GOAL. Attributes are saved in the upper byte of a tile, so adding
+an attribute to a tile with TILE.ATTRIBUTE is the same as writing
+TILE+(ATTRIBUTE<<8). And with '#define ATTRIB_TEST 0x80' TILE.TEST
+is the same as (TILE | 0x8000).
+
+For further examples take a look at the files 'mulg.lev' and 'mulg2.lev'. 
+
+The tiles existing in mulg II are:
+START      - The PATH tile the marble starts on (also defined as O)
+GOAL       - The cross tile the marble has to go to (also defined as X)
+SPACE      - This is empty space (the black square). This may be attached to
+             a switch and can be altered into a PATH element.
+PATH       - a tile you can just roll on (also defined as P)
+STONE      - a tile you can't enter (also defined as S)
+DOC        - associated to a doc statement, a message the user may take
+             up and read (the user can carry max 5 items at once, additional 
+             items are not taken)
+SW         - a switch. it has to be associated to on or more other objects 
+             like doors, fans (VENT) etc., everytime the player hits a switch
+             the objects change their state. The attribute field contains
+	     the id of the affected objects
+DOOR       - this is just a closed door. You have to attach this to a switch
+             to open it. It has to have to have to walkable tiles on two 
+             opposite sides and two non walkabled tiles on the other sides.
+             (also defined as DOR)
+ODOOR      - the same as above but initially open. (also defined as ODOR)
+
+... and lots of other tiles. 
+If you are interested in using a particular tile just look at the sources
+of a level containing this tile. All tiles are used somewhere. While some
+functions are quite obvious, some other tiles may be difficult to use.
+
+Special Functions
+A switch with attribute 0xff activates objects with id=0 (like a switch
+with attribute=0).
+
+BUGS
+Mulg and makelevel sure have some bugs. Most bugs will show up with
+combinations of tiles that i wasn't aware of and that i have never 
+tested/used in my levels. 
+
+If you encounter such a bug, you should (in descending order of
+priority):
+
+- track down the bug in mulg.c, correct it and send me a patch
+- use a workaround for your level (use some other tiles or 
+  use them in a different arangement)
+- If you have a clever idea for the perfect level which can't
+  be realized due to a bug in mulg, ask me to fix the bug (please 
+  include the level showing your problem in the bug report and a 
+  detailed description how to reproduce the bug). 
+

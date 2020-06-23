@@ -1,0 +1,8 @@
+imgmap ffffff sca0.gif bg.gif ../tile120.gif
+convert -rotate 90 sca0.gif tmp.gif
+imgmap ffffff tmp.gif bg.gif ../tile121.gif
+convert -flop -rotate 180 sca0.gif tmp.gif
+imgmap ffffff tmp.gif bg.gif ../tile122.gif
+convert -flop -rotate 270 sca0.gif tmp.gif
+imgmap ffffff tmp.gif bg.gif ../tile123.gif
+rm tmp.gif

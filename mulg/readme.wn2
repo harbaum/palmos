@@ -1,0 +1,19 @@
+Win2 2bpp graphics library
+by Wes Cherry (wesc@ricochet.net)
+ver 1.0
+
+Win2 is a 2bpp partial replacemnt for the Win* window drawing routines provided
+by 3Com/Palm.  It allows you to easily switch to grescale mode and provides
+basic drawing functionality.  See win2test.c and win2.h for sample usage.
+
+Win2 is provided as freeware for freeware or other non-commercial use.  If you 
+use Win2 in a shareware program, please send me 5% of your gross shareware 
+registration fees.  Contact me for commercial licensing.
+
+Thanks,
+Wes Cherry
+ScumbySoft
+1213 Shelby Ave E #14
+Seattle WA 98102
+
+

@@ -1,0 +1,8 @@
+# imgmap $1 $2 $3 $4 convert replace parts colored $1 in 
+# image $2 with data from image $3 into $4
+#
+convert $2 RGB:$2.rgb
+convert $3 RGB:$3.rgb
+replace $1 $2.rgb $3.rgb $4.rgb
+convert -size 16x16 RGB:$4.rgb $4
+rm $2.rgb $3.rgb $4.rgb

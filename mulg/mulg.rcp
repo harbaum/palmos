@@ -1,0 +1,154 @@
+//
+//  mulg.rcp
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#include "rsc.h"
+
+FORM ID InfoForm AT (2 2 156 156) USABLE MODAL
+BEGIN
+    TITLE   "Mulg IIp"
+
+    LABEL   "\251 1998 - 2001 by Till Harbaum" AUTOID AT (CENTER 16) 
+    LABEL   "http://bodotill.suburbia.com.au" AUTOID AT (CENTER PREVBOTTOM-1) 
+
+    LABEL   "This program is free software;" AUTOID AT (CENTER PREVBOTTOM+6)
+    LABEL   "you can redistribute it and/or" AUTOID AT (CENTER PREVBOTTOM-1)
+    LABEL   "modify it under the terms of the" AUTOID AT (CENTER PREVBOTTOM-1)
+    LABEL   "GNU General Public License (GPL)." AUTOID AT (CENTER PREVBOTTOM-1)
+
+    LABEL   "CREDITS" AUTOID AT (CENTER PREVBOTTOM+6) FONT 1 
+    LABEL   "Howard Samuels - tilt sensor supply" AUTOID AT (CENTER PREVBOTTOM-1)
+    LABEL   "Ilan Tayary - graphic level editor" AUTOID AT (CENTER PREVBOTTOM-1)
+    LABEL   "Pat E. Kane - scarabs and light boxes" AUTOID AT (CENTER PREVBOTTOM-1)
+    LABEL   "Tomoto Shimizu - multibyte fonts" AUTOID AT (CENTER PREVBOTTOM-1)
+
+    BUTTON  "Ok" ID InfoOk AT (RIGHT@156 0 20 11)    
+END
+//    BUTTON  "Ok" ID InfoOk AT (4 PREVBOTTOM+1 30 10)    
+
+FORM ID RscForm1 AT (2 2 156 156) USABLE MODAL
+BEGIN
+
+    LABEL   "_________________" AUTOID AT (CENTER 27) FONT 1
+    FORMBITMAP AT (39 11) BITMAP 3141
+    LABEL   "p" AUTOID AT (112 21) FONT 1
+
+    BUTTON "" ID SoundInd AT (5  3 12 12) NOFRAME
+    BUTTON "" ID TiltInd  AT (5 16 12 12) NOFRAME
+
+    BUTTON "i" ID Info  AT (RIGHT@150 5 10 10) FONT 1
+
+    LABEL   "Please select game:" AUTOID AT (10 DBSEL) FONT 1
+    REPEATBUTTON "\001" ID DBUp   AT (138 PREVBOTTOM-4 13 8) FONT 5 NOFRAME
+    REPEATBUTTON "\002" ID DBDown AT (138 PREVBOTTOM   13 8) FONT 5 NOFRAME
+
+    LABEL   "Please select a level:" AUTOID AT (10 LVSEL) FONT 1
+    REPEATBUTTON "\001" ID LevelUp   AT (138 PREVBOTTOM-4 13 8) FONT 5 NOFRAME
+    REPEATBUTTON "\002" ID LevelDown AT (138 PREVBOTTOM   13 8) FONT 5 NOFRAME
+
+    LABEL   "Top time for this level:" AUTOID AT (10 TMSEL) FONT 1
+
+    BUTTON  "Game info"  ID GameInfo AT (10 140 AUTO AUTO)    
+    BUTTON  "Play level" ID PlayButton AT (RIGHT@146 140 AUTO AUTO)    
+END	
+
+FORM ID AccSetup AT (2 70 156 158-70) USABLE MODAL
+BEGIN
+    TITLE "Accelerometer Setup"
+
+    CHECKBOX "Enable Accelerometer" ID AccOn     AT (20 16 AUTO AUTO)
+    CHECKBOX "Reverse X axis"       ID AccFlipX  AT (20 PREVBOTTOM AUTO AUTO)
+    CHECKBOX "Reverse Y axis"       ID AccFlipY  AT (20 PREVBOTTOM AUTO AUTO)
+    CHECKBOX "Exchange X/Y axis"    ID AccFlipXY AT (20 PREVBOTTOM AUTO AUTO)
+
+    BUTTON  "OK"     ID AccOK     AT (RIGHT@146 PREVBOTTOM+4 50 AUTO)    
+    BUTTON  "Cancel" ID AccCancel AT (10 PREVTOP 50 AUTO)    
+END
+
+BITMAP ID SoundOn  "sound_on.pbm"
+BITMAP ID SoundOff "sound_off.pbm"
+
+BITMAP ID TiltOn   "tilt_on.pbm"
+BITMAP ID TiltOff  "tilt_off.pbm"
+
+ALERT ID HiScore
+INFORMATION
+BEGIN
+  TITLE "New high score!"
+  MESSAGE "Congratulation, you made a new high score!"
+
+  BUTTONS "Yupp"
+END
+
+ALERT ID alt_GameInfo
+INFORMATION
+BEGIN
+  TITLE "Game Info"
+  MESSAGE "'^1' was written by ^2 and contains ^3 levels!"
+
+  BUTTONS "Delete" "Beam" "Ok"
+END
+
+ALERT ID alt_HSerase
+CONFIRMATION
+BEGIN
+  TITLE "Timer Reset"
+  MESSAGE "Reset level timers?"
+
+  BUTTONS "No" "Yes"
+END
+
+ALERT ID alt_DelDB
+CONFIRMATION
+BEGIN
+  TITLE "Delete Game"
+  MESSAGE "Really delete Game '^1'?"
+
+  BUTTONS "No" "Yes"
+END
+
+ALERT ID alt_err
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "^1"
+
+  BUTTONS "OK"
+END
+
+ALERT ID NoTilt
+HELPID TiltHelp
+ERROR
+BEGIN
+  TITLE "No accelerometer"
+  MESSAGE "There is no acceleration sensor available on this device!"
+  BUTTONS "OK"
+END
+
+STRING TiltHelp "Instructions how to "\
+  "add an adxl202 acceleration sensor to your pilot can be found "\
+  "at http://www.cs.tu-bs.de/~harbaum/pilot/adxl202.html."
+
+BITMAPFAMILY ID 3141 "title.pbm" "title_g2.bmp" "title_g4.bmp" "title_color.bmp" COMPRESS
+
+SMALLICON "icon_sm.pbm"
+ICONFAMILY "icon_bw.bmp" "icon_bw.bmp" "icon_g4.bmp" "icon_color.bmp"
+
+VERSION ID 1 "IIp"
+
+FONT ID AsciiFont FONTID AsciiFontId "AsciiFont.txt" /* added by T.Shimizu */
+
