@@ -1,0 +1,18 @@
+//
+// meminfo.rcp : Resource file for the meminfo application.
+//
+
+#include "meminfoRsc.h"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+BEGIN
+     TITLE "Memory Information"
+END
+
+ICON "meminfo.pbm"
+APPLICATION ID 1 "MemI"
+VERSION ID 1 "1.0"
+
+
+
+

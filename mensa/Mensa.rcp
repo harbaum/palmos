@@ -1,0 +1,117 @@
+//
+// Mensa.rcp : Resource file for the Mensa application.
+//
+
+#include "MensaRsc.h"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+     TITLE "Mensa"
+
+     REPEATBUTTON "\002"            ID MensaLeft AT   (DatePosX-DateArrWid 0 DateArrWid 13) FONT 4 NOFRAME
+     BUTTON          "Do. 01.01.04" ID MensaSelect AT (PrevRight PrevTop DateMaxLen PrevBottom) NOFRAME
+     REPEATBUTTON "\003"            ID MensaRight AT  (PrevRight PrevTop DateArrWid PrevBottom) FONT 4 NOFRAME
+
+     POPUPTRIGGER "Katharinenstraﬂe" ID MensenPopup AT (5 148 AUTO AUTO) LEFTANCHOR
+     LIST "Katharinenstraﬂe" "Beethovenstraﬂe" ID MensenList AT (PrevLeft PrevTop AUTO 1) NONUSABLE VISIBLEITEMS 2
+     POPUPLIST MensenPopup MensenList
+
+     POPUPTRIGGER "Essen 1-3" ID MensaPopup AT (PrevRight+16 148 55 AUTO)
+     LIST "Essen 1-3" "Essen 4+5" "Abend" ID MensaList AT (PrevLeft PrevTop 45 1) NONUSABLE VISIBLEITEMS 3
+     POPUPLIST MensaPopup MensaList
+END
+
+
+MENU ID mnu_Main
+BEGIN
+  PULLDOWN "Mensa"
+  BEGIN
+    MENUITEM "‹ber ..."          ID mit_About  "A"
+    MENUITEM SEPARATOR
+    MENUITEM "÷ffnungszeiten   " ID mit_Offen  "O"
+    MENUITEM "Preise"            ID mit_Preise "P"
+    MENUITEM "Zutaten-Info"      ID mit_Info   "Z"
+  END
+END
+
+FORM ID frm_About at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "‹ber Mensa ..."
+
+     FORMBITMAP AT (15 25) BITMAP About_Icon
+     LABEL "Essenpl‰ne"          ID 1200 AT (55 20) FONT 1
+     LABEL "der TU-Mensen"       ID 1201 AT (55 32) FONT 1
+     LABEL "Katharinenstraﬂe"    ID 1202 AT (55 44) FONT 1
+     LABEL "und Beethovenstraﬂe" ID 1203 AT (CENTER 56) FONT 1
+     LABEL "der TU-Braunschweig" ID 1204 AT (CENTER 68) FONT 1
+
+     LABEL "Version 1.2" ID 1205 AT (CENTER 90) FONT 2
+     LABEL "(c) 1998 by Till Harbaum" ID 1206 AT (CENTER 105)
+     LABEL "www.ibr.cs.tu-bs.de/~harbaum/pilot" ID 1207 AT (CENTER 117)
+
+     BUTTON "OK"   ID Dialog_OK AT (CENTER 140 AUTO AUTO)
+END
+
+BITMAP ID About_Icon "mensa.pbm"
+
+FORM ID frm_Offen at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "÷ffnungszeiten"
+
+     LABEL "Mensa Katharinenstraﬂe" ID 1300 AT (10 15) FONT 2
+     LABEL "Montag bis Freitag:"    ID 1301 AT (10 PrevBottom-3) FONT 1 
+     LABEL "11.30 bis 14.30 Uhr"    ID 1302 AT (30 PrevBottom-1)
+     LABEL "Abendmensa:"            ID 1303 AT (10 PrevBottom) FONT 1
+     LABEL "16.30 bis 20.00 Uhr"    ID 1304 AT (30 PrevBottom-1)
+     LABEL "Samstag:"               ID 1305 AT (10 PrevBottom) FONT 1
+     LABEL "11.30 bis 14.00 Uhr"    ID 1306 AT (30 PrevBottom-1)
+
+     LABEL "Mensa Beethovenstraﬂe"  ID 1307 AT (10 PrevBottom+5) FONT 2
+     LABEL "Montag bis Freitag:"    ID 1308 AT (10 PrevBottom-3) FONT 1 
+     LABEL "11.30 bis 14.15 Uhr"    ID 1309 AT (30 PrevBottom-1)
+
+     BUTTON "OK"   ID Dialog_OK AT (CENTER 140 AUTO AUTO)
+END
+
+FORM ID frm_Preise at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "Preise (Stud./Bed./G‰ste)"
+
+     LABEL "Mensa Katharinenstraﬂe" ID 1400 AT (CENTER 15) FONT 1
+     LABEL "Essen 1:  DM 1,60  DM 4,30  DM 4,90" ID 1402 AT (5 PrevBottom-2)
+     LABEL "Essen 2:  DM 2,20  DM 4,80  DM 5,40" ID 1403 AT (5 PrevBottom-2)
+     LABEL "Essen 3:  DM 2,80  DM 5,30  DM 5,90" ID 1404 AT (5 PrevBottom-2)
+     LABEL "Essen 4:  DM 3,90  DM 6,50  DM 7,10" ID 1405 AT (5 PrevBottom-2)
+     LABEL "Essen 5:  DM 4,40  DM 7,00  DM 7,60" ID 1406 AT (5 PrevBottom-2)
+
+     LABEL "Mensa Beethovenstraﬂe"  ID 1407 AT (CENTER PrevBottom+3) FONT 1
+     LABEL "Essen 1:  DM 1,60  DM 3,30  DM 4,00" ID 1402 AT (5 PrevBottom-2)
+     LABEL "Essen 2:  DM 2,20  DM 3,70  DM 4,60" ID 1402 AT (5 PrevBottom-2)
+     LABEL "Essen 3:  DM 2,60  DM 4,10  DM 5,40" ID 1402 AT (5 PrevBottom-2)
+     LABEL "Beilagen: DM 0,60  DM 1,00  DM 1,00" ID 1402 AT (5 PrevBottom-2)
+
+     BUTTON "OK"   ID Dialog_OK AT (CENTER 140 AUTO AUTO)
+END
+
+ALERT ID alt_Info
+INFORMATION
+BEGIN
+  TITLE "Zutaten-Informationen"
+  MESSAGE "(A) = alkoholhaltig\n(S) = mit Schweinefl.\n(O) = ohne Schweinefl.\n(V) = vegetarisch\n\ndiese Bezeichnung bezieht sich nur auf die Hauptkomponenten"
+
+  BUTTONS "OK"
+END
+
+ICON "mensa.pbm"
+SMALLICON "mensa_sm.pbm"
+APPLICATION ID 1 "Mnsa"
+VERSION ID 1 "1.2"
+
+
+
+
+
+
+
+
