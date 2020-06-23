@@ -1,0 +1,51 @@
+//
+// fsel.rcp : Resource file for file selector
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#include "fselRsc.h"
+
+BITMAPFAMILY ID IconFolder "icons/folder.1.bmp" "icons/folder.2.bmp" "icons/folder.4.bmp" "icons/folder.8.bmp"
+
+FORM ID rsc_fsel at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "X"
+
+     	POPUPTRIGGER "Card 0" ID rsc_cardlstsel AT (10 16 40 AUTO) LEFTANCHOR
+     	LIST "Card 0" "Card 1" ID rsc_cardlst AT (PrevLeft PrevTop 30 1) NONUSABLE VISIBLEITEMS 2
+     	POPUPLIST ID rsc_cardlstsel rsc_cardlst
+
+        FIELD ID rsc_path AT (55 16 91 11) MAXCHARS 64 UNDERLINED NONEDITABLE FONT 1
+ 
+        SCROLLBAR ID rsc_scrollbar AT (138 31 7 86) USABLE VALUE 0 MIN 0 MAX 0 PAGESIZE 8
+
+	BUTTON "" ID rsc_name0 AT (10 30 127 11) NOFRAME
+	BUTTON "" ID rsc_name1 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name2 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name3 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name4 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name5 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name6 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID rsc_name7 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+
+	FIELD ID rsc_name AT (10 121 136 11) MAXCHARS 64 UNDERLINED EDITABLE USABLE FONT 1
+
+	BUTTON "OK"     ID rsc_ok     AT (10 138 40 AUTO)
+	BUTTON "Cancel" ID rsc_cancel AT (PREVRIGHT+10 138 40 AUTO)
+
+	GRAFFITISTATEINDICATOR AT (RIGHT@136 138)
+END
+

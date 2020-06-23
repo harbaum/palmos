@@ -1,0 +1,386 @@
+//
+// IR-Pong.rcp : Resource file for the IR-Pong application.
+//
+
+#include "IR-PongRsc.h"
+
+// Test of FONT
+FONT ID 1000 FONTID 128 "font.txt" 
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+     TITLE "IR Pong"
+
+     BUTTON "" ID PongIndicator AT (144 1 16 12) NOFRAME
+     BUTTON "Connect ..." ID PongConnect AT (CENTER 144 AUTO AUTO)
+END
+
+STRING MainHelp "IR Pong is a two player pong game. \n\n"\
+  "Each player needs a Palm with infrared IO hardware "\
+  "(e.g. Pilot with Palm III upgrade, Palm III, Palm IIIx, Palm V or Palm VII). \n\n"\
+  "Place the two palm devices head to head and tap the 'Connect ...' button. "\
+  "Use the datebook or the address button to move the paddle to the left, the "\
+  "todo and the memo buttons move the paddle to the right. "\
+  "The player that holds the ball at his paddle starts the game "\
+  "by pressing the page up or page down button.\n\n"\
+  "Use your paddle to prevent the "\
+  "ball from leaving the screen to the bottom."
+
+MENU ID mnu_Main
+BEGIN
+  PULLDOWN "IR Pong"
+  BEGIN
+    MENUITEM "About"         ID menuAbout    "A"
+    MENUITEM SEPARATOR
+    MENUITEM "Setup"         ID menuSetup    "S"
+    MENUITEM SEPARATOR
+/*    MENUITEM "Register"      ID menuRegister "R" */
+    MENUITEM "Instructions"  ID menuHelp     "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Disconnect"    ID menuDiscon   "D"
+  END
+END
+
+FORM ID frm_About at ( 2 2 156 156 ) USABLE MODAL
+HELPID RegisterHelp
+BEGIN
+     TITLE "About IR Pong"
+
+     FORMBITMAP AT (10 40) BITMAP bmp_brick1
+     FORMBITMAP AT (10 49) BITMAP bmp_brick2
+     FORMBITMAP AT (27 40) BITMAP bmp_brick2
+
+     FORMBITMAP AT (30 70) BITMAP bmp_paddle
+     FORMBITMAP AT (45 60) BITMAP bmp_ball
+
+     LABEL "IR Pong"      AUTOID  AT (CENTER@110 30) FONT 128
+     LABEL "Version 1.1"  AUTOID  AT (CENTER@110 PREVBOTTOM+4) FONT 2
+     LABEL "(c) 1999 by"  AUTOID  AT (CENTER@110 PREVBOTTOM+4)
+     LABEL "Till Harbaum" AUTOID  AT (CENTER@110 PREVBOTTOM)
+
+     BUTTON "OK" ID AboutOK AT (CENTER 115 AUTO AUTO)
+
+     LABEL "T.Harbaum@tu-bs.de" AUTOID AT (CENTER PREVBOTTOM+5)     
+     LABEL "www.ibr.cs.tu-bs.de/~harbaum/pilot" AUTOID AT (CENTER PREVBOTTOM)     
+END
+
+STRING RegisterHelp 
+  "If you like this game, please go to a beach "\
+  "near to your home and collect some sand. Then put "\
+  "it into a little bag and send it with a "\
+  "postcard or photo showing that beach to "\
+  "\n\n  Almut Behrens\n  Marienstrasse 22a\n  38104 Braunschweig\n  Germany\n\n"\
+  "She's collecting sand from allover the world ..."
+
+FORM ID frm_Setup at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "Setup IR Pong"
+
+     LABEL "Local Setup:" AUTOID AT (10 20) FONT 1
+
+     CHECKBOX "Enable Sound" ID SetupSound AT (10 PREVBOTTOM+3 AUTO AUTO)
+     
+     LABEL "Paddle Speed:" AUTOID AT (10 PREVBOTTOM+3)
+     PUSHBUTTON "slow"    ID SetupPSpdS AT (68 PREVTOP-1 AUTO AUTO) GROUP 1
+     PUSHBUTTON "normal"  ID SetupPSpdN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 1     
+     PUSHBUTTON "fast"    ID SetupPSpdF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 1     
+
+     LABEL "Global Setup:" AUTOID AT (10 PREVBOTTOM+8) FONT 1
+
+     LABEL "Board Setup: " AUTOID AT (PREVLEFT PREVBOTTOM+3)
+     POPUPTRIGGER "None" ID SetupBrdLstSel AT (PrevRight+4 PrevTop 50 AUTO) LEFTANCHOR
+
+     LIST "None" "Board 1" "Board 2" "Board 3" "Board 4" "Board 5" "Board 6" "Board 7" "Board 8" "Random" ID SetupBrdLst AT (PrevLeft PrevTop 40 1) NONUSABLE VISIBLEITEMS 10
+     POPUPLIST ID SetupBrdLstSel SetupBrdLst
+
+     LABEL "Ball Speed: " AUTOID AT (10 101)
+     PUSHBUTTON "slow"    ID SetupBSpdS AT (68 PREVTOP-1 AUTO AUTO) GROUP 2
+     PUSHBUTTON "normal"  ID SetupBSpdN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 2
+     PUSHBUTTON "fast"    ID SetupBSpdF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 2     
+
+     LABEL "Increase: "   AUTOID AT (10 PREVBOTTOM+5)
+     PUSHBUTTON "slow"    ID SetupBIncS AT (68 PREVTOP-1 AUTO AUTO) GROUP 3
+     PUSHBUTTON "normal"  ID SetupBIncN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 3
+     PUSHBUTTON "fast"    ID SetupBIncF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 3
+
+     BUTTON "OK"     ID SetupOK     AT (30 140 40 AUTO)
+     BUTTON "Cancel" ID SetupCancel AT (90 140 40 AUTO)
+END
+
+// FORM ID frm_Register at ( 2 82 156 76 ) USABLE MODAL
+// HELPID RegisterHelp
+// BEGIN
+//     TITLE "Register IR Pong"
+
+//     LABEL "Username:"                 AUTOID  AT (10 20)
+//     LABEL "1234567890123456" ID RegisterName  AT (PREVRIGHT+3 PREVTOP) FONT 0
+//     LABEL "Registration code:"        AUTOID  AT (10 PREVBOTTOM+4)
+//     FIELD                    ID RegisterCode  AT (PREVRIGHT+3 PREVTOP 146-PREVRIGHT 20) UNDERLINED SINGLELINE MAXCHARS 6 NUMERIC FONT 0
+
+//     BUTTON "OK"     ID RegisterOK     AT ( 30 PREVBOTTOM+4 40 AUTO)
+//     BUTTON "Cancel" ID RegisterCancel AT ( 90 PREVTOP 40 AUTO)
+// END
+
+BITMAP ID IrIndIcon  "ir-ind.pbm"
+BITMAP ID bmp_paddle "paddle.pbm"
+BITMAP ID bmp_ball   "ball.pbm"
+BITMAP ID bmp_brick0 "brick0.pbm"
+BITMAP ID bmp_brick1 "brick1.pbm"
+BITMAP ID bmp_brick2 "brick2.pbm"
+
+ALERT ID alt_err
+ERROR
+BEGIN
+  TITLE "IR Pong - Error"
+  MESSAGE "^1"
+  BUTTONS "OK"
+END
+
+// ALERT ID alt_already
+// INFORMATION
+// BEGIN
+//  TITLE "Already registered"
+//  MESSAGE "This copy of IR Pong is already registered, no need to do this a second time."
+//  BUTTONS "OK"
+// END
+
+// ALERT ID alt_exp
+// HELPID RegisterHelp
+// ERROR
+// BEGIN
+//   TITLE "IR Pong has expired!"
+//   MESSAGE "The trial period of ^1 days is over, please register. You can still play games with a registered/trial opponent."
+//  BUTTONS "Register" "Continue"
+// END
+
+// STRING RegisterHelp "This program is shareware. If you'd like to continue "\
+//  "use this application beyond the trial period, you'll have to register. "\
+//  "The registration fee is $US 5 (or EUR 5 or DM 8). "\
+//  "After registration, you will be given a code "\
+//  "number, which will unlock the program for future use.\n"\
+//  "After the trial period is over, you may still play with a registered "\
+//  "opponent without paying the registration fee."
+
+// ALERT ID alt_regwrong
+// HELPID hlp_regwrong
+// ERROR
+// BEGIN
+//  TITLE "Wrong Registration"
+//  MESSAGE "This registration number is invalid!"
+//  BUTTONS "OK"
+// END
+
+// STRING hlp_regwrong "The registration code you "\
+//  "just entered does not match your user name. \n"\
+//  "Please retry and contact the author if the "\
+//  "problem still remains."
+
+// ALERT ID alt_regok
+// INFORMATION
+// BEGIN
+//  TITLE "Registration accepted"
+//  MESSAGE "Thank you for registering!"
+//  BUTTONS "OK"
+// END
+
+// ALERT ID alt_trial
+// HELPID RegisterHelp
+// INFORMATION
+// BEGIN
+//   TITLE "IR Pong trial period"
+//   MESSAGE "You still have ^1 days to try IR Pong without registration."
+//   BUTTONS "Register now" "Register later"
+// END
+
+ALERT ID alt_libfind
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to find infrared communications library."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_iropen
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to open infrared communications library."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irbind
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to bind to IR stack."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsetdev
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to set IR device info."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irdiscover
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to start IR discovery."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irconnect
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to connect to IR device."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsetname
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to set IR name.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_iriasadd
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to add IrIAS object."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irquery
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to query rLsap.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irconnectl
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to request IrLMP connection."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsend
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to send IR data.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irrespond
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to accept IR connection.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irbusy
+HELPID hlp_irbusy
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Infrared media is busy!"
+  BUTTONS "OK"
+END
+
+STRING hlp_irbusy "The in infrared media "\
+  "is already in use by some IrDA device.\n\n"\
+  "This may happen if one or more other IrDA devices are comminicating "\
+  "within the range of your IrDA interface.\n\nAnother possible reason "\
+  "is that the media is busy from a preceeding connect request. In this "\
+  "case the media will become availlable in a few seconds. Just retry a "\
+  "little later."
+
+ALERT ID alt_irdiscon
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Unable to disconnect IR.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irnoother
+HELPID hlp_irnoother
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "Found nobody to play with!"
+  BUTTONS "Cancel" "Retry"
+END
+
+STRING hlp_irnoother "There is no other IR Pong player within "\
+  "the range of your IR interface.\n\n"\
+  "Maybe your opponent is too far away or did not start the game."
+
+ALERT ID alt_iriaserr
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "IAS error: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irlost
+HELPID hlp_irlost
+ERROR
+BEGIN
+  TITLE "IR Pong - IO Error"
+  MESSAGE "The infrared connection was lost!"
+  BUTTONS "OK"
+END
+
+STRING hlp_irlost "The game did not receive any valid game "\
+  "data for several seconds. The infrared connection is "\
+  "lost and the communication is shut down."
+
+ALERT ID alt_wrongOs
+HELPID hlp_wrongOs
+ERROR
+BEGIN
+  TITLE "IR Pong - OS Error"
+  MESSAGE "This game requires an operating system with infrared support."
+  BUTTONS "OK"
+END
+
+STRING hlp_wrongOs "This game requires infrared communications support "\
+  "within the operating system. The operating system version installed "\
+  "on this machine does not support infrared communication. You'll need "\
+  "at least Palm OS 3.0 to play this game."
+
+ALERT ID alt_version
+HELPID hlp_version
+ERROR
+BEGIN
+  TITLE "IR Pong - IR Error"
+  MESSAGE "The machines are using different versions of IR-Pong (local: ^1 / opponent: ^2)."
+  BUTTONS "OK"
+END
+
+STRING hlp_version "IR Pong needs the same version of the game on both machines. "\
+  "The player with the newer version might update his opponent by beaming the newer version to "\
+  "the other machine. Be careful not to overwrite the new version with the old one."
+
+ICON "IR-Pong.pbm"
+SMALLICON "IR_small.pbm"  // icon for P3 list view
+
+APPLICATION ID 1 "IRPn"
+VERSION ID 1 "1.1"
+
+
+
+

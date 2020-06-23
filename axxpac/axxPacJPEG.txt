@@ -1,0 +1,65 @@
+axxPacJPEG.prc V1.2                          (c) 2000 Till Harbaum
+------------------------------------------------------------------
+
+- INTRODUCTION
+The axxPac JPEG plugin allows you to view JPEG images stored
+on a SmartMedia card directly on any axxPac equipped Palm.
+
+For details about the axxPac have a look at www.axxpac.de
+
+- SYSTEM REQUIREMENTS
+The axxPac JPEG plugin requires your palm to be axxPac
+equipped and you need at least version 2.08 of the 
+axxPac Shell and version 1.08 of the axxPac Drviver. Both 
+can be found at www.axxpac.de
+
+- INSTALLATION
+To install the plugin, just hotsync axxPacJPEG.prc to your
+Palm device. The axxPac JPEG plugin is an extension for 
+the axxPac Shell. It does not show up as a seperate program 
+in the launcher. Instead it adds the capability to view JPEG 
+images directly to the Shell program.
+
+- USAGE
+Once the JPEG plugin is installed on the palm, a new icon
+will show up for all JPEG images (all files with 'jpg' extension) 
+stored on the SmartMedia. To view an image, just click on the
+image in 'move' or 'copy' mode or on the icon in every mode
+or select the 'view' button in the file info dialog.
+
+The images will be displayed shrunken by 8 in both directions. 
+A 1280x1024 image for example will be scaled to 160x128 and
+will fit exactly onto the screen. A 1600x1200 image will be 
+cropped left and right to fit onto the screen. And images smaller
+than 1280x1024 will be displayed centered on the screen.
+
+'Will there ever be a version of this plugin that supports
+scrollable full size pictures to store maps etc' might be
+your next question. Despite the fact that this would be a very
+nice feature, this is nearly impossible with the DragonBall
+CPU used in the palms. By reducing the image size by a factor
+of 8 in both directions, some of the most complex tasks in
+JPEG image decompression could be skipped. A complete decompression 
+of full size JPEG images is far beyond the capabilities of
+your favorite handheld.
+
+- SCREEN ADJUSTMENT
+In some cases, depending on the display hardware used in your
+palm, the OS version installed and hacks like e.g. nostreak
+or streakhack installed, your display may flicker or require
+contrast adjustment when displaying the image.
+
+To adjust the display settings select the 'config plugin' menu
+in axxPac Shell program. Select 'config' in the row of the the 
+JPEG plugin (usually the first row) and select the desired 
+refresh mode.
+
+- REGISTRATION
+The axxPac JPEG plugin is nag-free shareware, please register at
+   www.palmgear.com
+
+- DO YOU WANT TO CREATE YOUR OWN PLUGIN'S
+If you have written some axxPac file viewer for you file type
+and want to create a plugin like this one just contact me at 
+T.Harbaum@tu-bs.de 
+

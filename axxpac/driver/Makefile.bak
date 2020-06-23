@@ -1,0 +1,94 @@
+# axxPac driver library
+
+LIBNAME   = axxPacDrv
+LIBNAMEP  = axxPacDrvProto
+CREATOR   = axPC
+
+OBJECTS   = $(LIBNAME).o TrapHook.o fsel.o filesys.o errors.o
+OBJECTS3X = smartmedia_3x.o
+OBJECTSP  = smartmedia.o
+
+TOOLBASE = m68k-palmos-coff-
+CC = $(TOOLBASE)gcc -nostartfiles
+LD = m68k-palmos-coff-gcc -nostartfiles
+XTRALIBS =
+OBJRES = $(TOOLBASE)obj-res
+BUILDPRC = build-prc -L
+PILRC = pilrc
+
+CSFLAGS = -O2 -S
+DEBUG = -DDEBUG
+CFLAGS = -O2 -DCREATOR=\'$(CREATOR)\' $(DEBUG)
+CFLAGSOPT = $(CFLAGS) -fomit-frame-pointer
+CFLAGS3X = $(CFLAGSOPT) -DPALM3X
+
+all: ../$(LIBNAME).prc # ../$(LIBNAMEP).prc
+
+fsel.o: fsel.c
+	$(CC) $(CFLAGSOPT) -o $@ -c $<
+
+errors.o: errors.c
+	$(CC) $(CFLAGSOPT) -o $@ -c $<
+
+filesys.o: filesys.c
+	$(CC) $(CFLAGSOPT) -o $@ -c $<
+
+smartmedia.o: smartmedia.c
+	$(CC) $(CFLAGSOPT) -o $@ -c $<
+
+%_3x.o: %.c
+	$(CC) $(CFLAGS3X) -o $@ -c $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+../$(LIBNAME).prc: libr0000.$(LIBNAME).grc res.stamp
+	$(BUILDPRC) $@ "axxPac Driver Lib" $(CREATOR)\
+			 libr0000.$(LIBNAME).grc *.bin
+	m68k-palmos-coff-objdump --section-headers $(LIBNAME)
+
+../$(LIBNAMEP).prc: libr0000.$(LIBNAMEP).grc res.stamp
+	$(BUILDPRC) $@ "axxPac Driver Lib" $(CREATOR)\
+			 libr0000.$(LIBNAMEP).grc *.bin
+	m68k-palmos-coff-objdump --section-headers $(LIBNAMEP)
+
+res.stamp: fsel.rcp fsel.h
+	$(PILRC) fsel.rcp .
+	touch res.stamp
+
+libr0000.$(LIBNAME).grc: $(LIBNAME)
+	$(OBJRES) $(LIBNAME)
+	rm -f {code,pref,data}0000.$(LIBNAME).grc
+	mv code0001.$(LIBNAME).grc libr0000.$(LIBNAME).grc
+
+libr0000.$(LIBNAMEP).grc: $(LIBNAMEP)
+	$(OBJRES) $(LIBNAMEP)
+	rm -f {code,pref,data}0000.$(LIBNAMEP).grc
+	mv code0001.$(LIBNAMEP).grc libr0000.$(LIBNAMEP).grc
+
+$(LIBNAME): $(OBJECTS) $(OBJECTS3X)
+	$(LD) -o $(LIBNAME) $(OBJECTS) $(OBJECTS3X) $(XTRALIBS)
+
+$(LIBNAMEP): $(OBJECTS) $(OBJECTSP)
+	$(LD) -o $(LIBNAMEP) $(OBJECTS) $(OBJECTSP) $(XTRALIBS)
+
+clean:
+	rm -f *.bin *.stamp *.grc *.o $(LIBNAME) $(LIBNAMEP) *~
+
+depend:
+	makedepend *.c
+
+# DO NOT DELETE
+
+
+axxPacDrv.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h smartmedia.h
+errors.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h smartmedia.h
+filesys.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h smartmedia.h
+fsel.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h fsel.h smartmedia.h
+smartmedia.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h smartmedia.h
+TrapHook.o: ../api/axxPac.h axxPacDrv.h errors.h filesys.h smartmedia.h
+
+
+
+
+

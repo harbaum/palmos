@@ -1,0 +1,4 @@
++ reopen listen socket after close
+- move slave/master packet creation from ir.c/bt.c to IR-Pong2.c
+- collision check for bottom row 
+- clean up protocol

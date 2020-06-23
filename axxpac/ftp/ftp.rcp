@@ -1,0 +1,107 @@
+//
+// ftp.rcp : Resource file for axxPac ftp
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#include "ftpRsc.h"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+	TITLE "FTP"
+ 	SCROLLBAR ID scl_Main AT (153 17 7 128) USABLE VALUE 0 MIN 0 MAX 0 PAGESIZE 10
+
+        BUTTON "" ID btn_Back AT ( 0 BOTTOM@159 12 11) NOFRAME
+	FORMBITMAP AT (1 BOTTOM@161) BITMAP IconBack
+
+        BUTTON "Upload" ID btn_Upload AT ( RIGHT@159 BOTTOM@159 40 11)
+END
+
+MENU ID mnu_Main
+BEGIN
+  PULLDOWN "FTP"
+  BEGIN
+    MENUITEM "About ..." ID menuAbout "A"
+  END
+END
+
+BITMAPFAMILY ID IconBack   "icons/back.1.bmp" "icons/back.2.bmp" "icons/back.4.bmp" "icons/back.8.bmp"
+BITMAPFAMILY ID IconBusy   "icons/busy.1.bmp" "icons/busy.2.bmp" "icons/busy.4.bmp" "icons/busy.8.bmp"
+
+Alert ID alt_err
+ERROR
+BEGIN
+	TITLE "Error"
+  	MESSAGE "^1"
+
+  	BUTTONS "OK"
+END
+
+Alert ID alt_err2
+ERROR
+BEGIN
+	TITLE "Error"
+  	MESSAGE "^1:\n^2"
+
+  	BUTTONS "OK"
+END
+
+Alert ID alt_about
+INFORMATION
+BEGIN
+	TITLE "axxPac FTP client v2.0"
+  	MESSAGE "axxPac FTP client\n(c) 2000-2001 Till Harbaum\n- GPL'd -\n\nT.Harbaum@web.de\nbodotill.suburbia.com.au"
+
+  	BUTTONS "OK"
+END
+
+FORM ID frm_ServerCon at ( 2 102 156 56 ) USABLE MODAL
+BEGIN
+        TITLE "Connecting ..."
+
+	FORMBITMAP AT (14 25) BITMAP IconBusy
+        LABEL "Connecting to:" AUTOID  AT (40 20) FONT 1
+        LABEL "" ID lbl_SName AT (PREVLEFT PREVBOTTOM+2) FONT 0
+END
+
+FORM ID frm_ServerOpen at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+        TITLE "Connect to FTP Server"
+
+        LABEL "Server name:" AUTOID  AT (10 20) FONT 1
+        FIELD ID SrvName AT (10 PREVBOTTOM+3 136 AUTO) UNDERLINED MAXCHARS 32 FONT 0
+
+        LABEL "User name:" AUTOID  AT (10 PREVBOTTOM+5) FONT 1
+        FIELD ID SrvUser AT (10 PREVBOTTOM+3 136 AUTO) UNDERLINED MAXCHARS 32 FONT 0
+
+        LABEL "Password:" AUTOID  AT (10 PREVBOTTOM+5) FONT 1
+        FIELD ID SrvPass AT (10 PREVBOTTOM+3 136 AUTO) UNDERLINED MAXCHARS 32 FONT 0
+
+	CHECKBOX "Close connection on exit" ID SrvClose AT (10 PREVBOTTOM+5 AUTO AUTO)
+
+        BUTTON "OK"     ID SrvOK     AT ( 10 PREVBOTTOM+10 40 AUTO)
+        BUTTON "Cancel" ID SrvCancel AT ( PREVRIGHT+10 PREVTOP 40 AUTO)
+        GRAFFITISTATEINDICATOR 136 PREVTOP+1
+END
+
+ICONFAMILY "icons/ftp.1.bmp" "icons/ftp.2.bmp" "icons/ftp.4.bmp" "icons/ftp.8.bmp"
+SMALLICONFAMILY "icons/ftp_sm.1.bmp" "icons/ftp_sm.2.bmp" "icons/ftp_sm.4.bmp" "icons/ftp_sm.8.bmp"
+
+VERSION ID 1 "2.0"
+
+
+
+

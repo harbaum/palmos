@@ -1,0 +1,39 @@
+// config.rcp
+// axxPac JPEG configuration
+
+#include "config.h"
+
+FORM ID rsc_config at ( 2 2 156 156 ) USABLE MODAL
+HELPID rsc_help
+BEGIN
+	TITLE "JPEG plugin config"
+
+	LABEL "(c) 2000 by Till Harbaum"   AUTOID AT (CENTER 20) FONT 1
+	LABEL "and Matthias Remmer"        AUTOID AT (CENTER PREVBOTTOM+1) FONT 1
+	LABEL "This program is shareware." AUTOID AT (CENTER PREVBOTTOM+4) FONT 1
+	LABEL "Please register at"         AUTOID AT (CENTER PREVBOTTOM+1) FONT 1
+	LABEL "www.palmgear.com"           AUTOID AT (CENTER PREVBOTTOM+1) FONT 1
+
+	LABEL "Screen refresh rate:"       AUTOID AT (10 PREVBOTTOM+10)
+	PUSHBUTTON "System"   ID rsc_sys   AT (10          PREVBOTTOM+4 40 11) GROUP 1
+        PUSHBUTTON "Low"      ID rsc_low   AT (PREVRIGHT+8 PREVTOP      27 11) GROUP 1
+        PUSHBUTTON "Mid"      ID rsc_mid   AT (PREVRIGHT+1 PREVTOP      27 11) GROUP 1
+        PUSHBUTTON "High"     ID rsc_high  AT (PREVRIGHT+1 PREVTOP      27 11) GROUP 1
+
+	BUTTON "Ok" ID rsc_ok AT (10 138 40 AUTO)
+	BUTTON "Cancel" ID rsc_cancel AT (PREVRIGHT+10 138 40 AUTO)
+END
+
+STRING ID rsc_help "This dialog allows you to adjust "\
+"the display quality of the JPEG image. "\
+"Usually you should be able to work with "\
+"the 'system' setting, which just uses "\
+"the display timing preset by the operating "\
+"system.\n\nIf this setting causes the image "\
+"to flicker or requires you to adjust the "\
+"contrast while viewing the image please "\
+"try one of the other settings (low, mid or high)."
+
+// version of the whole JPEG plugin
+VERSION "1.2"
+

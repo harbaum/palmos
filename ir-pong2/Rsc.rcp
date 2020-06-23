@@ -1,0 +1,371 @@
+//
+// IR-Pong.rcp : Resource file for the IR-Pong application.
+//
+
+#include "Rsc.h"
+
+// Test of FONT
+FONT ID 1001 FONTID 129 "font_num.txt" 
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+     TITLE "IR Pong 2"
+
+     LABEL "Multi Player"   AUTOID  AT (10 25) FONT 7
+
+     LABEL "Total Games Won:"  AUTOID  AT (10 PREVBOTTOM+2) FONT 2
+     LABEL "0000"  ID PongWon AT (RIGHT@150 PREVTOP) FONT 2
+     LABEL "Total Games Lost:" AUTOID  AT (10 PREVBOTTOM+2) FONT 2
+     LABEL "0000"  ID PongLost  AT (RIGHT@150 PREVTOP) FONT 2
+
+     BUTTON "Infrared" ID PongIRConnect AT (RIGHT@150 PREVBOTTOM+8 60 AUTO) FONT 1
+     BUTTON "Bluetooth" ID PongBTConnect AT (RIGHT@PREVLEFT-10 PREVTOP 60 AUTO) FONT 1
+
+     LABEL "Single Player"     AUTOID  AT (10 PREVBOTTOM+7) FONT 7
+
+     LABEL "Top score:"        AUTOID  AT (10 PREVBOTTOM+2) FONT 2
+     LABEL "0000"  ID PongScore  AT (RIGHT@150 PREVTOP) FONT 2
+
+     BUTTON "Start" ID PongPractice  AT (RIGHT@150 PREVBOTTOM+4 60 AUTO) FONT 1
+END
+
+MENU ID mnu_Main
+BEGIN
+  PULLDOWN "IR Pong 2"
+  BEGIN
+    MENUITEM "About"          ID menuAbout    "A"
+    MENUITEM SEPARATOR
+    MENUITEM "Setup"          ID menuSetup    "S"
+    MENUITEM "Instructions"   ID menuHelp     "I"
+    MENUITEM "Score table"    ID menuList     "T"
+    MENUITEM SEPARATOR
+    MENUITEM "Beam game"      ID menuBeam     "B"
+    MENUITEM SEPARATOR
+    MENUITEM "Quit Game"      ID menuDiscon   "Q"
+  END
+END
+
+//    MENUITEM "Send game"      ID menuSend     "X"
+
+STRING MainHelp "IR Pong 2 is a game for one or two players.\n\n"\
+  "In single player mode the objective is to remove all destructable "\
+  "bricks from the screen. To start the single player game, just "\
+  "tap Start in the single player section on the start screen.\n\n"\
+  "In two player mode the objective is to prevent the ball from "\
+  "dropping off the screen to your side. To start the two player "\
+  "game place both palm device head to head and tap the Start "\
+  "button in the multi player section on the start screen.\n\n"\
+  "The serving player can release the ball from the paddle with the page up "\
+  "or page down button. The paddle is moved with the "\
+  "datebook or address buttons to the left and with the "\
+  "todo and memo buttons to the right.\n\nOnce the laser is "\
+  "fully charged pushing the page up button will fire the "\
+  "laser. Use the laser to destroy bricks or the opponents "\
+  "paddle.\n\nAdditional balls may be released during the game "\
+  "by hitting special bricks containing additional balls.\n\n"\
+  "A single player game ends, when the last ball in the game is lost.\n\n"\
+  "A two player game ends when the first ball is lost. "\
+  "The player losing the last ball looses the game."
+
+FORM ID TextView at ( 2 2 156 156 ) USABLE MODAL SAVEBEHIND
+BEGIN
+	TITLE "xyz"
+
+     	FIELD ID ViewField AT (4 15 144 121) NONEDITABLE MULTIPLELINES MAXCHARS 4096 FONT 1
+	SCROLLBAR ID ViewScrollbar AT (148 15 7 121)
+
+     	BUTTON "Done" ID ViewOK AT ( 4 141 AUTO AUTO)
+END
+
+FORM ID frm_About at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "About IR Pong 2"
+
+     FORMBITMAP AT (10 40) BITMAP bmp_brick0
+     FORMBITMAP AT (10 49) BITMAP bmp_brick1
+     FORMBITMAP AT (27 40) BITMAP bmp_brick6
+
+     FORMBITMAP AT (20 70) BITMAP bmp_paddle0
+     FORMBITMAP AT (35 60) BITMAP bmp_ball
+
+     LABEL "IR Pong"  AUTOID  AT (CENTER@72 20) FONT 7
+     LABEL "0.0"  ID AboutVersion AT (PREVRIGHT+3 20) FONT 7
+     LABEL "written by"         AUTOID  AT (CENTER@105 PREVBOTTOM+8)
+     LABEL "Till Harbaum"       AUTOID  AT (CENTER@105 PREVBOTTOM) FONT 1
+     LABEL "palm@harbaum.org"   AUTOID  AT (CENTER@105 PREVBOTTOM)
+
+     LABEL "More great software at"  AUTOID AT (CENTER PREVBOTTOM+10)
+     LABEL "http://www.harbaum.org/till/palm"  AUTOID AT (CENTER PREVBOTTOM) FONT 0
+
+     BUTTON "OK" ID AboutOK AT (CENTER 137 40 AUTO)
+END
+
+FORM ID frm_Setup at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+     TITLE "Setup IR Pong 2"
+
+     LABEL "Local Setup:" AUTOID AT (10 20) FONT 1
+
+     CHECKBOX "Enable Sound" ID SetupSound AT (10 PREVBOTTOM+3 AUTO AUTO)
+     
+     LABEL "Paddle Speed:" AUTOID AT (10 PREVBOTTOM+3)
+     PUSHBUTTON "slow"    ID SetupPSpdS AT (68 PREVTOP-1 AUTO AUTO) GROUP 1
+     PUSHBUTTON "normal"  ID SetupPSpdN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 1     
+     PUSHBUTTON "fast"    ID SetupPSpdF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 1     
+
+     LABEL "Global Setup:" AUTOID AT (10 PREVBOTTOM+8) FONT 1
+
+     LABEL "Multiplayer board: " AUTOID AT (PREVLEFT PREVBOTTOM+3)
+     POPUPTRIGGER "Board 1" ID SetupBrdLstSel AT (PrevRight+4 PrevTop 50 AUTO) LEFTANCHOR
+
+     LIST "Board 1" "Board 2" "Board 3" "Board 4" "Board 5" "Board 6" "Board 7" "Board 8" "Board 9" "Random" ID SetupBrdLst AT (PrevLeft PrevTop 40 1) NONUSABLE VISIBLEITEMS 10
+     POPUPLIST ID SetupBrdLstSel SetupBrdLst
+
+     LABEL "Ball Speed: " AUTOID AT (10 101)
+     PUSHBUTTON "slow"    ID SetupBSpdS AT (68 PREVTOP-1 AUTO AUTO) GROUP 2
+     PUSHBUTTON "normal"  ID SetupBSpdN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 2
+     PUSHBUTTON "fast"    ID SetupBSpdF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 2     
+
+     LABEL "Increase: "   AUTOID AT (10 PREVBOTTOM+5)
+     PUSHBUTTON "slow"    ID SetupBIncS AT (68 PREVTOP-1 AUTO AUTO) GROUP 3
+     PUSHBUTTON "normal"  ID SetupBIncN AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 3
+     PUSHBUTTON "fast"    ID SetupBIncF AT (PREVRIGHT+1 PREVTOP AUTO AUTO) GROUP 3
+
+     BUTTON "OK"     ID SetupOK     AT (30 140 40 AUTO)
+     BUTTON "Cancel" ID SetupCancel AT (90 140 40 AUTO)
+END
+
+BITMAPFAMILY bmp_paddle0   "graphics/paddle0.1.bmp" "graphics/paddle0.2.bmp" "graphics/paddle0.4.bmp" "graphics/paddle0.8.bmp" COMPRESS
+BITMAPFAMILY bmp_paddle1   "graphics/paddle1.1.bmp" "graphics/paddle1.2.bmp" "graphics/paddle1.4.bmp" "graphics/paddle1.8.bmp" COMPRESS
+BITMAPFAMILY bmp_ball      "graphics/ball.1.bmp"    "graphics/ball.2.bmp"    "graphics/ball.4.bmp"    "graphics/ball.8.bmp" COMPRESS
+BITMAPFAMILY bmp_border    "graphics/border.1.bmp"  "graphics/border.2.bmp"  "graphics/border.4.bmp"  "graphics/border.8.bmp" COMPRESS
+BITMAPFAMILY bmp_border_r  "graphics/border.1r.bmp" "graphics/border.2r.bmp" "graphics/border.4r.bmp" "graphics/border.8r.bmp" COMPRESS
+BITMAPFAMILY bmp_pbar0     "graphics/pbar0.1.bmp"   "graphics/pbar0.2.bmp"   "graphics/pbar0.4.bmp"   "graphics/pbar0.8.bmp" COMPRESS
+BITMAPFAMILY bmp_pbar1     "graphics/pbar1.1.bmp"   "graphics/pbar1.2.bmp"   "graphics/pbar1.4.bmp"   "graphics/pbar1.8.bmp" COMPRESS
+BITMAPFAMILY bmp_pbar2     "graphics/pbar2.1.bmp"   "graphics/pbar2.2.bmp"   "graphics/pbar2.4.bmp"   "graphics/pbar2.8.bmp" COMPRESS
+BITMAPFAMILY bmp_shot_up   "graphics/shot.1.bmp"    "graphics/shot.2.bmp"    "graphics/shot.4.bmp"    "graphics/shot.8.bmp" COMPRESS
+BITMAPFAMILY bmp_shot_down "graphics/shot.1d.bmp"   "graphics/shot.2d.bmp"   "graphics/shot.4d.bmp"   "graphics/shot.8d.bmp" COMPRESS
+
+BITMAPFAMILY bmp_brick0  "graphics/brick0.1.bmp"  "graphics/brick0.2.bmp"  "graphics/brick0.4.bmp"  "graphics/brick0.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick1  "graphics/brick1.1.bmp"  "graphics/brick1.2.bmp"  "graphics/brick1.4.bmp"  "graphics/brick1.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick2  "graphics/brick2.1.bmp"  "graphics/brick2.2.bmp"  "graphics/brick2.4.bmp"  "graphics/brick2.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick3  "graphics/brick3.1.bmp"  "graphics/brick3.2.bmp"  "graphics/brick3.4.bmp"  "graphics/brick3.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick4  "graphics/brick4.1.bmp"  "graphics/brick4.2.bmp"  "graphics/brick4.4.bmp"  "graphics/brick4.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick5  "graphics/brick5.1.bmp"  "graphics/brick5.2.bmp"  "graphics/brick5.4.bmp"  "graphics/brick5.8.bmp" COMPRESS
+BITMAPFAMILY bmp_brick6  "graphics/brick6.1.bmp"  "graphics/brick6.2.bmp"  "graphics/brick6.4.bmp"  "graphics/brick6.8.bmp" COMPRESS
+
+ALERT ID alt_err
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - Error"
+  MESSAGE "^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_bt_err
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - Bluetooth Error"
+  MESSAGE "^1: ^2"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_libfind
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to find infrared communications library."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_iropen
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to open infrared communications library."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irbind
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to bind to IR stack."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsetdev
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to set IR device info."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irdiscover
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to start IR discovery."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irconnect
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to connect to IR device."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsetname
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to set IR name.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_iriasadd
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to add IrIAS object."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irquery
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to query rLsap.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irconnectl
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to request IrLMP connection."
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irsend
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to send IR data.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irrespond
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to accept IR connection.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irbusy
+HELPID hlp_irbusy
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Infrared media is busy!"
+  BUTTONS "OK"
+END
+
+STRING hlp_irbusy "The in infrared media "\
+  "is already in use by some IrDA device.\n\n"\
+  "This may happen if one or more other IrDA devices are comminicating "\
+  "within the range of your IrDA interface.\n\nAnother possible reason "\
+  "is that the media is busy from a preceeding connect request. In this "\
+  "case the media will become availlable in a few seconds. Just retry a "\
+  "little later."
+
+ALERT ID alt_irdiscon
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Unable to disconnect IR.\nStatus: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irnoother
+HELPID hlp_irnoother
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "Found nobody to play with!"
+  BUTTONS "Cancel" "Retry" "Beam"
+END
+
+// "Send"
+
+STRING hlp_irnoother "There is no other IR Pong 2 player within "\
+  "the range of your IR or Bluetooth interface.\n\n"\
+  "Maybe your opponent is too far away or did not start the game."
+
+ALERT ID alt_iriaserr
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "IAS error: ^1"
+  BUTTONS "OK"
+END
+
+ALERT ID alt_irlost
+HELPID hlp_irlost
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IO Error"
+  MESSAGE "The connection was lost!"
+  BUTTONS "OK"
+END
+
+STRING hlp_irlost "The game did not receive any valid game "\
+  "data for several seconds. The infrared connection is "\
+  "lost and the communication is shut down."
+
+ALERT ID alt_wrongOs
+HELPID hlp_wrongOs
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - OS Error"
+  MESSAGE "This game requires an operating system with infrared support."
+  BUTTONS "OK"
+END
+
+STRING hlp_wrongOs "This game requires infrared communications support "\
+  "within the operating system. The operating system version installed "\
+  "on this machine does not support infrared communication. You'll need "\
+  "at least Palm OS 3.0 to play this game."
+
+ALERT ID alt_version
+HELPID hlp_version
+ERROR
+BEGIN
+  TITLE "IR Pong 2 - IR Error"
+  MESSAGE "The machines are using different versions of IR Pong 2 (local: ^1 / opponent: ^2)."
+  BUTTONS "OK"
+END
+
+STRING hlp_version "IR Pong 2 needs the same version of the game on both machines. "\
+  "The player with the newer version might update his opponent by beaming the newer version to "\
+  "the other machine. Be careful not to overwrite the new version with the old one."
+
+ALERT ID alt_hiscore
+INFORMATION
+BEGIN
+  TITLE "IR Pong 2 - Hiscore"
+  MESSAGE "Congratulations, you made a new hiscore."
+  BUTTONS "OK"
+END
+
+ICONFAMILY "graphics/icon.1.bmp"    "graphics/icon.2.bmp"    "graphics/icon.4.bmp"    "graphics/icon.8.bmp" TRANSPARENT 255 255 255
+SMALLICONFAMILY  "graphics/icon_sm.1.bmp" "graphics/icon_sm.2.bmp" "graphics/icon_sm.4.bmp" "graphics/icon_sm.8.bmp" TRANSPARENT 255 255 255
+
+
+
+

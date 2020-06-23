@@ -1,0 +1,508 @@
+<html>
+<title>The axxPac driver library API</title>
+<body bgcolor=white>
+<center><h2>The axxPac driver library API</h2></center>
+<center>(c) 2000 Till Harbaum / <a href=http://www.ams-fl.com>AMS Software GmbH</a></center>
+
+<h3>INTRODUCTION</h3>
+
+The axxPac driver library allows for fast and easy access to
+SmartMedia cards on the palm computing platform. Since the PalmOS does
+not support file systems and does not provide an interface for generic
+file handling, the interface to the axxPac adapter is
+implemented using the PalmOS shared system library concept.<p>
+
+A PalmOS shared system library is a ressource file (.prc) like most
+other PalmOS applications, but does not show up in the launcher and
+can't be used as a stand-alone application. The shared library
+provides functionality for other applications and can be shared between
+multiple applications. The axxPac driver library (axxPacDrv.prc)
+allows the software developer to include generic file IO into any of
+his PalmOS applications. This library does not provide support for
+applications that aren't specifically developed to make use of the
+file IO functions.<p>
+
+<h3>INTERFACING TO THE AXXPAC DRIVER LIBRARY</h3>
+
+The axxPac driver library can be called by any program like any other
+PalmOS shared system library. All necessary function prototypes and
+constants are provided with the axxPac driver header file 
+(axxPac.h).<p>
+
+The following code segment is an example for accessing and opening
+the driver library:<p>
+
+<pre>
+  Err err;
+  UInt LibRef;
+
+  /* try to open already installed axxPac driver lib */
+  err = SysLibFind(AXXPAC_LIB_NAME, &LibRef);
+
+  /* didn't work, try to load it */
+  if (err) err = SysLibLoad('libr', AXXPAC_LIB_CREATOR, &LibRef);
+    
+  if(err) {
+    /* ERROR: unable to access library */
+  } else {
+    /* try to open lib */
+    if(axxPacLibOpen(LibRef) != 0) {
+      /* ERROR: unable to open library */
+    } else {
+      /* SUCCESS: library is open and working */
+    }
+  }
+</pre>
+
+Closing the library is even easier:
+<pre>
+  UInt numapps;
+  err = axxPacLibClose(LibRef, &numapps);
+
+  if(err) {
+    /* ERROR: unable to access library */
+  } else {
+    if (numapps == 0)
+      SysLibRemove(LibRef);
+  }
+</pre>
+
+Please make sure, to always close the library on exit of your
+program. Otherwise the axxPac hardware will still be enabled and may
+draw current even if no axxPac enabled software is running.
+Furthermore, it will not be possible to delete or replace the driver
+library, since it is still registered in the PalmOS library handler.<p>
+
+<h3>Return value format changed</h3>
+Version 1.18 of the driver library introduces a new return type
+<tt>axxPacErr</tt> for all axxPac functions. The <tt>Err</tt> type
+provided by the PalmOS SDK is not used anymore, since the format
+of <tt>Err</tt> has changed from PalmOS-SDK version 3.1 to SDK version
+3.5. The new <tt>axxPacErr</tt> type is compatible with the <tt>Err</tt>
+type provided by all SDKs up to version 3.1. The new type is compatible
+with all current PalmOS SDKs.
+
+<h3>SUPPORTED FUNCTIONS</h3>
+
+<h4>LIBRARY FUNCTIONS</h4>
+
+<b>axxPacErr axxPacLibOpen(UInt refNum)</b><p>
+
+  Open the axxPac driver library and initialize the hardware.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacLibClose(UInt refNum, UIntPtr numappsP)</b><p>
+
+  Close the axxPac driver library and disable the hardware.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>numappsP</b></td><td>&nbsp;</td><td>Pointer to value to store the number of applications that still access the library.</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<a name=error><b>char* axxPacStrError(UInt refnum)</b><p></a>
+
+  Get current error string.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td></td><td>&nbsp;</td><td>Address of error message</td></tr>
+</table><p>&nbsp;<p>
+
+<a name=getinfo><b>axxPacErr axxPacGetLibInfo(UInt refnum, axxPacLibInfo *linfo)</b><p></a>
+
+  Get library information.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>linfo</b></td><td>&nbsp;</td><td>Pointer to library info structure to fill</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<h4>CARD FUNCTIONS</h4>
+
+<b>axxPacErr axxPacInstallCallback(UInt refnum, void(*callback)(axxPacCardState))</b><p>
+
+  Install callback handler to display card status.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td><b>callback</b></td><td>&nbsp;</td><td>Pointer to callback function expecting state of card (NULL = don't use callback)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacGetCardInfo(UInt refnum, axxPacCardInfo *cinfo)</b><p>
+
+  Get information on currently inserted card.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td><b>linfo</b></td><td>&nbsp;</td><td>Pointer to card info structure to fill</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacFormat(UInt refnum, void(*callback)(unsigned char percent))</b><p>
+
+  Format the SmartMedia card currently inserted.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>callback</b></td><td>&nbsp;</td><td>Callback function to draw progress bar (in percent).</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacDiskspace(UInt refnum, DWord *free)</b><p>
+
+  Get free diskspace on current media in bytes.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>free</b></td><td>&nbsp;</td><td>Pointer to DWord to return free bytes</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<h4>DIRECTORY FUNCTIONS</h4>
+
+<b>axxPacErr axxPacExists(UInt refnum, char *filename)</b><p>
+
+  Determine whether a file or directory exists in the current directory.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>filename</b></td><td>&nbsp;</td><td>Pointer to file/directory name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error (file or directory exists)</td></tr>
+</table><p>&nbsp;<p>
+
+<a name=findfirst><b>axxPacErr axxPacFindFirst(UInt refnum, char *pattern, axxPacFileInfo *info, int mode)</b><p></a>
+
+  Start search for files or directories.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>pattern</b></td><td>&nbsp;</td><td>Pointer to pattern to search for (<a href=#note1>Note 1</a> and <a href=#note2>2</a>). 
+The pattern may contain '*' (maches any character sequence) and '?' (matches any single character). An empty 
+pattern returns all files in the current directory.</td></tr> 
+<tr><td></td><td></td><td valign=top><b>info</b></td><td>&nbsp;</td><td>Pointer to a buffer to be used during search.</td></tr> 
+<tr><td></td><td></td><td valign=top><b>mode</b></td><td>&nbsp;</td><td>Search mode, supported modes are:
+<ul>
+<li><b>FIND_FILES_ONLY</b>: search for matching files only
+<li><b>FIND_FILES_N_DIRS</b>: search for matching files and matching directories
+<li><b>FIND_FILES_N_ALL_DIRS</b>: search for matching files and <b>all</b> directories
+</ul>
+
+</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error, file found</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt; 0</td><td>&nbsp;</td><td>no error, no file found</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacFindNext(UInt refnum, axxPacFileInfo *info)</b><p>
+
+  Continue a search started by <a href=#findfirst>axxPacFindFirst</a>.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>info</b></td><td>&nbsp;</td><td>Pointer to a buffer to be used during search (must be identical to pointer used for <a href=#findfirst>axxPacFindFirst</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error, file found</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt; 0</td><td>&nbsp;</td><td>no error, no file found</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacNewDir(UInt refnum, char *dirname)</b><p>
+
+  Create a new subdirectory in the current directory.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>dirname</b></td><td>&nbsp;</td><td>Name of new directory (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacChangeDir(UInt refnum, char *dirname)</b><p>
+
+  Change current working directory.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>dirname</b></td><td>&nbsp;</td><td>Name of new working directory (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>char* axxPacGetCwd(UInt refnum)</b><p>
+
+  Get name of current working directory.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt; 0</td><td>&nbsp;</td><td>Pointer to name of current working directory</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacDelete(UInt refnum, char *name)</b><p>
+
+  Delete file or directory.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>Name of file or directory to delete (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacRename(UInt refnum, char *old_name, char *new_name)</b><p>
+
+  Rename a file or directory. This function may also be used to move files
+  or directories on the media (see <a href=#note3>Note 3</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>old_name</b></td><td>&nbsp;</td><td>Current file or directory name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>new_name</b></td><td>&nbsp;</td><td>New file or directory name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacSetWP(UInt refnum, char *name, Boolean protection)</b><p>
+
+  Set write protection for file (see <a href=#note3>Note 3</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>file name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>protection</b></td><td>&nbsp;</td><td>set/unset protection bit</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacStat(UInt refnum, char *name, axxPacStatType *stat)</b><p>
+
+  Get file infos (see <a href=#note4>Note 4</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>Name of file or directory to get info from (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>stat</b></td><td>&nbsp;</td><td>Pointer to stat buffer</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacSetAttrib(UInt refnum, char *name, unsigned char attr)</b><p>
+  Change file attributes FA_RDONLY, FA_HIDDEN, FA_SYSTEM and FA_ARCH 
+  (see <a href=#note5>Note 5</a>). The FA_VOLUME and FA_SUBDIR
+  attributes connot be changed.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>file name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>attr</b></td><td>&nbsp;</td><td>new attributes</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacSetDate(UInt refnum, char *name, UInt32 date)</b><p>
+
+  Set file date and time (see <a href=#note5>Note 5</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>file name (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>date</b></td><td>&nbsp;</td><td>new date/time in PalmOS format (seconds since 1/1/1904)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<h4>FILE IO FUNCTIONS</h4>
+
+<b>axxPacFD axxPacOpen(UInt refNum, char *name, axxPacMode mode)</b><p>
+
+  Open a file.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>name</b></td><td>&nbsp;</td><td>Name of file to be opened (<a href=#note1>Note 1</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>mode</b></td><td>&nbsp;</td><td>The open mode may either be:
+<ul>
+<li><b>O_RdOnly</b>: open file read only
+<li><b>O_RdWr</b>: open file read/write
+<li><b>O_Creat</b>: create new file, erase existing file
+</ul>
+</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt;= 0</td><td>&nbsp;</td><td>file descriptor of open file</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacClose(UInt refNum, axxPacFD fd)</b><p>
+
+  Close file.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>fd</b></td><td>&nbsp;</td><td>File descriptor of file to close</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>long axxPacRead(UInt refnum, axxPacFD fd, void *buffer, long size)</b><p>
+
+  Read bytes from file into buffer.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>fd</b></td><td>&nbsp;</td><td>File descriptor to read from</td></tr> 
+<tr><td></td><td></td><td valign=top><b>buffer</b></td><td>&nbsp;</td><td>Address of buffer to write to</td></tr> 
+<tr><td></td><td></td><td valign=top><b>size</b></td><td>&nbsp;</td><td>Number of bytes to read</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no bytes left in file (at end of file)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt; 0</td><td>&nbsp;</td><td>number of bytes read</td></tr>
+</table><p>&nbsp;<p>
+
+<b>long axxPacWrite(UInt refnum, axxPacFD fd, void *buffer, long size)</b><p>
+
+  Write bytes from buffer to file.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>fd</b></td><td>&nbsp;</td><td>File descriptor to write to</td></tr> 
+<tr><td></td><td></td><td valign=top><b>buffer</b></td><td>&nbsp;</td><td>Address of buffer read from</td></tr> 
+<tr><td></td><td></td><td valign=top><b>size</b></td><td>&nbsp;</td><td>Number of bytes to write</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt;= 0</td><td>&nbsp;</td><td>number of bytes written</td></tr>
+</table><p>&nbsp;<p>
+
+<b>axxPacErr axxPacSeek(UInt refnum, axxPacFD fd, long offset, int whence)</b><p>
+
+  Set file position indicator.<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>fd</b></td><td>&nbsp;</td><td>File descriptor to seek</td></tr> 
+<tr><td></td><td></td><td valign=top><b>offset</b></td><td>&nbsp;</td><td>Distance to move pointer</td></tr> 
+<tr><td></td><td></td><td valign=top><b>whence</b></td><td>&nbsp;</td><td>Direction to move pointer:
+<ul>
+<li><b>SEEK_SET</b>: set pointer from start of file
+<li><b>SEEK_CUR</b>: set pointer relative to current position
+<li><b>SEEK_END</b>: set pointer relative to end of file
+</ul>
+</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error</td></tr>
+</table><p>&nbsp;<p>
+
+<b>long axxPacTell(UInt refnum, axxPacFD fd)</b><p>
+
+  Get current file pointer position (see <a href=#note4>Note 4</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>fd</b></td><td>&nbsp;</td><td>File descriptor to get pointer position from</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>&gt;= 0</td><td>&nbsp;</td><td>current file pointer position</td></tr>
+</table><p>&nbsp;<p>
+
+<h4>FILESELECTOR</h4>
+
+<b>axxPacErr axxPacFsel(UInt refnum, char *title, char *file, 
+	                    char *patterm, Boolean editable)</b><p>
+
+<center><img alt="Snapshot of file selector" src=fsel.gif><br>
+<h5>The axxPac file selector</h5>
+</center>
+
+  Pop up a file selector (see <a href=#note4>Note 4</a>).<p>
+
+<table border=0>
+<tr><td>Parameters:</td><td>&nbsp;&nbsp;</td><td valign=top><b>refNum</b></td><td>&nbsp;&nbsp;</td><td>Library reference</td></tr>
+<tr><td></td><td></td><td valign=top><b>title</b></td><td>&nbsp;</td><td>Pointer to file selector title</td></tr> 
+<tr><td></td><td></td><td valign=top><b>file</b></td><td>&nbsp;</td><td>Pointer to file name (<a href=#note1>Note 1</a>). This pointer has to point to
+a character array of size AXXPAC_FSEL_BUFFERSIZE. A given path and name will be used to initialize the selector. On exit 
+via 'OK', this array will contain the selected file name.</td></tr> 
+<tr><td></td><td></td><td valign=top><b>pattern</b></td><td>&nbsp;</td><td>File search pattern (<a href=#note2>Note 2</a>)</td></tr> 
+<tr><td></td><td></td><td valign=top><b>editable</b></td><td>&nbsp;</td><td>Flag whether the user may enter
+a new name manually (usually to write a new file)</td></tr> 
+<tr><td>&nbsp;</td></tr>
+<tr><td>Result:</td><td>&nbsp;</td><td align=right>&lt; 0</td><td>&nbsp;</td><td>error code (see <a href=#error>axxPacStrError</a>)</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>0</td><td>&nbsp;</td><td>no error, but cancel selected</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td align=right>1</td><td>&nbsp;</td><td>no error, ok selected</td></tr>
+</table><p>&nbsp;<p>
+
+<hr>
+<table border=0>
+<a name=note1>
+<tr><td valign=top><b>Note 1</b>:</td>
+        <td>The file or directory name may contain full paths which
+        may be absolute or relative (e.g. /usr/bin/foo.bar or 
+        ../folder/./foo.bar). Please note, that the axxPac uses
+        the unix style path name delimiter '/' (slash), <b>not</b> its 
+        MSDOS and windows counterpart '\' (backslash).</td></tr>
+</a>
+
+<a name=note2>
+<tr><td valign=top><b>Note 2</b>:</td>
+        <td>When using wildcards ('*' and '?') be aware, that wildcards
+        are used in unix manner, which means that '*.*' matches
+        all files containing at least one dot '.'. Please use 
+        '*' to match <b>all</b> files.</td></tr>
+</a>
+
+<a name=note3>
+<tr><td valign=top><b>Note 3</b>:</td>
+        <td>Function exists since interface revision 1 
+	(see <a href=#getinfo>axxPacGetLibInfo</a>)</td></tr>
+</a>
+
+<a name=note4>
+<tr><td valign=top><b>Note 4</b>:</td>
+        <td>Function exists since interface revision 2 
+	(see <a href=#getinfo>axxPacGetLibInfo</a>)</td></tr>
+</a>
+
+<a name=note5>
+<tr><td valign=top><b>Note 5</b>:</td>
+        <td>Function exists since interface revision 3
+	(see <a href=#getinfo>axxPacGetLibInfo</a>)</td></tr>
+</a>
+</table>
+
+<body>
+</html>

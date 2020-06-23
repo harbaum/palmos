@@ -1,0 +1,12 @@
++ Installation von SmartSync.prc knallt
++ komplexe Pfadangaben
++ Speichern des aktuellen Pfades
++ Dateien loeschen
++ Dateien schreiben
++ Dateien anlegen
++ Directories erzeugen
++ 'No card' und 'Write Prot' testen
++ Dateien umbenennen
++ Fileselektor
+- Es hat beim Verlassen speichermaessig geknallt, nachdem
+  die Karte nach dem Formatieren nicht ok war

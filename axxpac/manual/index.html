@@ -1,0 +1,331 @@
+<HTML>
+<HEAD><TITLE>axxPac Bedienungsanleitung</TITLE></HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+&nbsp;<p>
+<CENTER><H2>axxPac Bedienungsanleitung</H2></CENTER>
+<hr>
+&nbsp;<p>
+
+<table border=0 borderwidth=0><tr>
+<td><center><h5><IMG SRC=about.gif><br>Bild&nbsp;1: axxPac-Treiber</h5></center></td><td>&nbsp;</td><td>
+
+<h3>Inhalt</h3>
+<ul>
+<li><a href=#inst>Installation und Start</a>
+<li><a href=#uebersicht>Übersichtserstellung</a>
+<li><a href=#palmview>Das Hauptfenster in der Palmdarstellung</a>
+<li><a href=#kartensymbol>Das Kartensymbol</a>
+<li><a href=#cardview>Das Hauptfenster in der Kartendarstellung</a>
+<li><a href=#copy2palm>Datenübertragung von der SmartMedia-Karte in den Palm Pilot</a>
+  <ul>
+  <li><a href=#copy2memo>Datenübertragung von der SmartMedia-Karte in den Merkzettel (Memopad)</a>
+  <li><a href=#nosymb>Dateien ohne Symbol</a>
+  </ul>
+<li><a href=#copy2card>Datenübertragung vom Palm Pilot auf die SmartMedia-Karte</a>
+  <ul>
+  <li><a href=#newdir>Anlegen eines neuen Verzeichnisses</a>
+  <li><a href=#newfile>Anlegen einer neuen Datei auf der SmartMedia-Karte</a>
+  </ul>
+<li><a href=#modi>Weitere Modi</a>
+<li><a href=#format>Formatieren von SmartMedia-Karten</a>
+</ul>
+</td></tr></table>
+
+<a name=inst><h3>Installation und Start</h3></a>
+Da das Betriebssystem des Palm Pilot keine Treiber f&uuml;r den axxPac-Adapter
+enth&auml;lt wird zusätzlich ein Treiberprogramm benötigt.<p>
+Das Treiberprogramm (<tt>axxPac.prc</tt>) muß daher auf dem Palm Pilot
+installiert werden. Wie Sie Programme auf dem Palm Pilot installieren 
+entnehmen Sie bitte dem Handbuch Ihres Palm Pilot.<p>
+Das Treiberprogramm erscheint auf dem Palm Pilot mit einem eigenen
+Symbol. Starten Sie das Programm indem Sie auf das Symbol tippen:
+<img src=launcher_icon.gif align=top>
+
+<a name=uebersicht><h3>Übersichtserstellung</h3></a>
+Als erstes verschafft sich das Programm nun einen Überblick über die zur Zeit auf dem
+Palm Pilot installierten Daten und eine gegebenenfalls installierte SmartMedia-Karte.
+Dieser Vorgang kann je nach Menge der installierten Programme einige Sekunden dauern.<p>
+
+Wie bei sämtlichen Vorgängen, die bei axxPac eine gewisse Zeit in Anspruch nehmen, wird
+auch hierbei eine Fortschrittsanzeige (Bild&nbsp;2) eingeblendet.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=progress.gif><br>Bild&nbsp;2: Fortschrittsanzeige</h5></center></td>
+<td><center><h5><IMG SRC=palmlist.gif><br>Bild&nbsp;3: Hauptfenster (Palmdarstellung)</h5></center></td>
+<td><center><h5><IMG SRC=builtin.gif><br>Bild&nbsp;4: Die eingebauten Programme</h5></center></td>
+</tr></table>
+
+<a name=palmview><h3>Das Hauptfenster in der Palmdarstellung</h3></a>
+Nachdem die auf dem Palm installierten Datenbanken bekannt sind werden sie im axxPac-Hauptfenster
+angezeigt (Bild&nbsp;3). Die Menge der installierten Datenbanken kann dabei sehr groß sein (z.B. besteht
+jedes installierte Programm aus mindestens einer Datenbank und ggf. einigen zusätzlichen Datenbanken).
+Um die Daten möglichst übersichtlich darzustellen werden sie in Gruppen zusammengefaßt. Eine Gruppe
+wird durch das Symbol <img src=folder.gif> angezeigt.<p>
+
+Die ersten fünf Gruppen sind fest vorgegeben:
+<dl>
+<dt><b>[System]</b></dt><dd>Diese Gruppe fasst alle Systemdatenbanken zusammen. 
+Diese Daten sind Teil des Betriebsystems.</dd>
+<dt><b>[Built-In]</b></dt><dd>Hier befinden sich die eingebauten Programme (Kalender,
+Adressen, ...) und deren Daten.</dd>
+<dt><b>[Hacks]</b></dt><dd>In diese Gruppe fallen alle Systemerweiterungen (Hacks). Haben
+Sie keine Hacks installiert, dann ist diese Gruppe leer.</dd>
+<dt><b>[Documents]</b></dt><dd>Diese Gruppe anthält alle Text-Dokumente im verbreiteten
+Doc-Format, die Sie auf Ihrem Palm installiert haben. Haben Sie keine solchen
+Dokumente installiert, dann ist diese Gruppe leer.</dd>
+<dt><b>[unknown]</b></dt><dd>Unter diese Gruppe fallen alle Datenbanken, die keiner
+Gruppe zugeordnet werden konnten und für die anscheinend keine Anwendung installiert ist.
+Solche Daten entstehen z.B. manchmal, wenn ein Programm Daten anlegt, sie aber nicht als
+die eigenen kennzeichnet. Diese Daten werden dann beim Löschen des Programmes nicht
+automatisch mitgelöscht. Shareware-Programme speichern auf diese Weise manchmal das Datum 
+der Erstinstallation oder andere Registrierungsdaten (z.B. Datebook 3). Auch 
+Betriebssystem-Updates erscheinen hier.
+</dl>
+
+Zusätzlich installierte Programme werden in eigenen Gruppen angezeigt. Bestehen diese
+Programme aus mehreren Datenbanken, dann werden sie mit einem Gruppensymbol <img src=folder.gif>
+mit dem Namem des Programmes angezeigt (Beispiel CSpotRun in Bild&nbsp;3). Programme, die aus
+einer einzigen Programmdatenbank bestehen (in Bild&nbsp;3 der axxPac-Treiber), werden direkt
+(also nicht in einer Gruppe) mit dem Programmsymbol <img src=sync_db.gif> gekennzeichnet und
+ihre Länge und das Erstellungsdatum werden angezeigt.<p>
+
+Der Inhalt einer Gruppe wird Ihnen detailiert angezeigt, sobald Sie auf eine Gruppe tippen
+(Bild&nbsp;4 zeigt den Inhalt der Built-In-Gruppe). In dieser Ansicht ist nur noch eine
+Gruppe mit zwei Punkten im Namen <img src=folder.gif>&nbsp;.. sichtbar. Diese Gruppe verweist 
+auf die Gruppendarstellung, kehrt also in die Darstellung zurück, die ursprünglich sichtbar 
+war. In der aktuellen Detaildarstellung werden zwei weitere Symbole verwendet. Das 
+Programmsymbol <img src=sync_db.gif> zeigt ausführbare Palm-Programme an und das
+Datenbank-Symbol <img src=sync.gif> zeigt Datenbanken an. Zum Beispiel enthält die
+in Bild&nbsp;4 sichtbare Datenbank <img src=sync.gif>AddressDB die im Palm gespeicherten
+Adressen. Die Darstellung in Bild&nbsp;4 stammt von einem englischsprachigen Palm, bei einem
+deutschen Palm können die Namen der Datenbanken variieren.<p>
+
+<a name=kartensymbol><h3>Das Kartensymbol</h3></a>
+Ist eine SmartMedia-Karte eingesetzt, so wird in der rechten oberen Bildschirmecke das
+Kartensymbol <img src=card.gif> und der auf der Karte noch verfügbare Speicher eingeblendet
+(in Bild&nbsp;3 ist also eine Karte eingelegt, auf der noch 1888 Kilobytes frei sind). Das
+Kartensymbol <img src=card.gif> hat gleichzeitig die Funktion einer Zugriffsanzeige
+(vergleichbar mit der Leuchtdiode am Diskettenlaufwerk). Sobald auf die Karte zugegriffen
+wird erscheint eine Sanduhr im Kartensymbol <img src=busy.gif>. Solange die Sanduhr
+aktiv ist sollten Sie die SmartMedia-Karte nicht entfernen.<p>
+
+<a name=cardview><h3>Das Hauptfenster in der Kartendarstellung</h3></a>
+Bisher hat das Programm lediglich die auf dem Palm Pilot installierten Datenbanken 
+angezeigt. Der eigentliche Sinn des axxPac-Treibers liegt aber im Zugriff auf eine
+eingesteckte SmartMedia-Karte. Stellen Sie also sicher, daß eine SmartMedia-Karte
+eingelegt ist (falls noch nicht geschehen, dann tun Sie das bitte jetzt) und
+schalten Sie also die Darstellung im Hauptfenster von der Palmdarstellung um in 
+die Kartendarstellung, indem Sie auf die Kartenauswahl <img src=cardsel.gif> am 
+unteren Bildschirmrand tippen. Mit der Palmauswahl <img src=palmsel.gif> kehren
+Sie jederzeit zurück in die Palmdarstellung.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=cardlist.gif><br>Bild&nbsp;5: Hauptfenster (Kartendarstellung)</h5></center></td>
+<td><center><h5><IMG SRC=cardmulg.gif><br>Bild&nbsp;6: Das Mulg-Verzeichnis</h5></center></td>
+</tr></table>
+
+Bild&nbsp;5 zeigt den Inhalt einer SmartMedia-Karte (bei einer bisher unbenutzten, also leeren Karte
+werden hier einfach keine Einträge angezeigt). Die Darstellung der Daten erfolgt in Anlehnung
+an die Palmdarstellung. Was in der Palmdarstellung die Gruppe war ist hier das Verzeichnis.
+Während in der Palmdarstellung diese Gruppenzugehörigkeit künstlich hergestellt wurde, ist
+die Verzeichnisstruktur auf der SmartMedia wirklich vorhanden und entspricht Verzeichnissen
+(Directories) auf der Diskette oder Festplatte. Ist die SmartMedia-Karte in den Adapter an
+einem PC eingesteckt, so erscheinen die Verzeichnisse dort genauso wie auf dem Palm in
+der Kartendarstellung.<p>
+
+Auch in der Kartendarstellung kann man durch einfaches Antippen des Verzeichnisses (der Gruppe)
+in das Verzeichnis wechseln. Bild&nbsp;6 zeigt die Darstellung, nachdem auf das Verzeichnis 
+<img src=folder.gif>&nbsp;Mulg&nbsp;II getippt wurde. Dieses Verzeichnis enthält die Daten
+eines Computerspiels. Diese wurden von einem PC auf die Karte geschrieben und sind daher
+in den auf dem PC üblicherweise für Palm-Daten verwendeten PRC und PDB-Dateien enthalten.
+Auch hier existiert wieder der ominöse Eintrag mit den zwei Punkten 
+(<img src=folder.gif>&nbsp;..). Und wie schon 
+in der Palmdarstellung dient er auch hier dazu, ein Verzeichnis wieder zu verlassen. Ein
+weiterer Eintrag mit nur einem Punkt (<img src=folder.gif>&nbsp;.) verweist auf das Verzeichnis
+selbst (ein Tippen auf dieses Verzeichnis ändert also nichts). Diese Einträge sind notwendig,
+da die hier benutzten SmartMedia-Karten auch im PC schreib- und lesbar sein sollen.
+Im Gegensatz zu den Gruppen der Palmdarstellung können Verzeichnisse verschachtelt sein. Es 
+können also weitere Verzeichnisse in Verzeichnissen existieren.<p>
+
+<a name=copy2palm><h3>Datenübertragung von der SmartMedia-Karte in den Palm Pilot</h3></a>
+Sämtliche mit dem Datenbank-Symbol <img src=sync.gif> gekennzeichnete Dateien lassen
+sich durch antippen von der Karte in den Palm kopieren (stellen Sie dabei sicher, daß der 
+Modus unten rechts auf Kopieren <img src=modecopy.gif> steht). Tippt man in Bild&nbsp;6 zum Beispiel
+nacheinander auf die drei Datenbanken im Mulg-Verzechnis, so werden sie im Palm 
+installiert.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=palmmulg.gif><br>Bild&nbsp;7: Mulg-Gruppe auf dem Palm</h5></center></td>
+<td><center><h5><IMG SRC=palmmulg2.gif><br>Bild&nbsp;8: Detaildarstellung</h5></center></td>
+<td><center><h5><IMG SRC=launchmulg.gif><br>Bild&nbsp;9: Mulg kann gestartet werden</h5></center></td>
+</tr></table>
+
+Ein Wechsel zurück in die Palmdarstellung (Bild&nbsp;7) zeigt, daß auf dem Palm jetzt eine Mulg-Gruppe
+existiert. Ein Blick in diese Gruppe zeigt die drei Datenbanken, die soeben auf den Palm kopiert
+wurden (Bild&nbsp;8). Daß die Daten auf dem Palm unterschiedliche Namen tragen liegt an der Tatsache, daß
+der Palm die Dateinamen aus dem Inhalt der PDB- und PRC-Dateien liest und sich nicht um
+die Dateinamen, die auf der SmartMedia-Karte verwendet wurden, kümmert. Dieser Effekt tritt
+bei Dateien die vom PC "gehotsynct" werden ebenso auf.<p>
+
+Daß das Mulg-Programm und seine Daten tatsächlich korrekt auf dem Palm installiert wurden zeigt sich, sobald der
+axxPac-Treiber verlassen wird. Auf dem Palm erscheint nun neu das Mulg-Programm (Bild&nbsp;9), das
+sich wie gewohnt durch antippen starten läßt. Der Palm erkennt dabei keinen Unterschied
+zu Daten, die gehotsynct wurden. Die mit axxPac erstellten Daten können also
+zum Beispiel wie gehabt gelöscht werden.
+
+<a name=copy2memo><h4>Datenübertragung von der SmartMedia-Karte in den Merkzettel (Memopad)</h4></a>
+Wie man in Bild&nbsp;6 sehen kann sind nicht alle Dateien mit dem Datenbank-Symbol
+<img src=sync.gif> gekennzeichnet. Einige Dateien werden auch mit dem Text-Symbol
+<img src=text.gif> dargestellt. Diese Dateien sind einfache Text-Dateien
+unter 30000 Zeichen Länge und können in die Merkzettel-Anwendung (in der englischen
+Version das Memopad) übertragen werden.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=mulgtxtiview.gif><br>Bild&nbsp;10: Ansicht von README.TXT</h5></center></td>
+<td><center><h5><IMG SRC=mulgmemo.gif><br>Bild&nbsp;11: README.TXT im Merkzettel</h5></center></td>
+<td><center><h5><IMG SRC=mulgtxtview.gif><br>Bild&nbsp;12: Der Inhalt von README.TXT </h5></center></td>
+</tr></table>
+
+Um den Text in den Merkzettel zu übertragen geht man genauso vor, wie bei der
+Übertragung von Palm-Datenbanken. Tippt man zum Beispiel in der Kartendarstellung
+im Mulg-Verzeichnis (Bild&nbsp;6) auf die Datei <img src=text.gif>&nbsp;<tt>README.TXT</tt>, 
+dann erscheint ein Textfenster mit dem ausgewählten Text (Bild&nbsp;10). Über
+einen Button im Textfenster kann der Text in die Merkzettelanwendung übernommen
+werden. Nach dem Betätigen des Buttons befindet sich in der Merkzettelanwendung ein neuer
+Merkzettel mit dem Namen der ursprünglichen Datei (Bild&nbsp;11). Diese Datei kann nun
+wie die anderen Merkzettel angesehen und bearbeitet werden (Bild&nbsp;12).<p>
+
+Durch eine Eigenheit des PalmOS gibt es hier ein Einschränkung: Offiziell kann das
+PalmOS nur Merkzettel mit einer Länge bis 4000 Zeichen bearbeiten. In der Tat kann man
+aber Dateien bis ca. 30000 Zeichen problemlos installieren und ansehen. Allerdings lassen
+sich in Dateien mit mehr als 4000 Zeichen keine weiteren Zeichen einfügen. PalmOS erlaubt
+es nur, solche Dateien anzusehen, zu löschen oder zu verkürzen.<p>
+
+<a name=nosymb><h4>Dateien ohne Symbol</h4></a>
+Dateien auf der SmartMedia-Karte ohne jedes Symbol sind für den axxPac-Treiber
+nicht verwendbar und können nicht auf den Palm Pilot übertragen werden.<p>
+
+<a name=copy2card><h3>Datenübertragung vom Palm Pilot auf die SmartMedia-Karte</h3></a>
+Neben der Übertragung von Daten von der Karte auf den Palm Pilot ist auch
+der umgekehrte Weg möglich. Die Übertragung von Daten vom Palm auf die
+SmartMedia-Karte funktioniert genauso wie in der Gegenrichtung.<p>
+
+<a name=newdir><h4>Anlegen eines neuen Verzeichnisses</h4></a>
+Da aber, wie schon erwähnt, die Verzeichnisse auf der SmartMedia-Karte nicht
+wie die Gruppen im Palm automatisch angelegt werden, muß ein Verzeichnis 
+manuell angelegt werden. Dazu existiert im Menü (Bild&nbsp;13) der Eintrag
+<b>New Directory</b>.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=menunewdir.gif><br>Bild&nbsp;13: Das Menü</h5></center></td>
+<td><center><h5><IMG SRC=newdir.gif><br>Bild&nbsp;14: Der Name des Verzeichnisses</h5></center></td>
+<td><center><h5><IMG SRC=newdir2.gif><br>Bild&nbsp;15: Ein neues Verzeichnis</h5></center></td>
+</tr></table>
+
+Nach dem Antippen dieses Menüpunktes erscheint ein Dialog zur Eingabe eines 
+Verzeichnisnamens. In Bild&nbsp;14 wird ein neues Verzeichnis namens <tt>Backup</tt>
+angelegt. Danach erscheint in der Kartendarstellung das neue Verzeichnis
+als <img src=folder.gif>&nbsp;<tt>Backup</tt>. Das neue Verzeichnis wird im
+aktuell ausgewählten Verzeichnis auf der Karte angelegt. Neben dem Kartensymbol am
+oberen rechten Bildschirmrand erkennt man, daß der freie Speicher um 8 Kilobytes
+verringert wurde. Der Speicher der dargestellten 4 Megabytes großen Karte wird 
+in 8 Kilobyte großen Blöcken verwaltet, größere Karten benutzen größere
+Blöcke. Das neue Verzeichnis enthält lediglich die bekannten Punkt-Verzeichnisse
+(<img src=folder.gif>&nbsp;. und <img src=folder.gif>&nbsp;.. in Bild&nbsp;16).<p>
+
+<a name=newfile><h4>Anlegen einer neuen Datei auf der SmartMedia-Karte</h4></a>
+Um eine Datenbank vom Palm auf die SmartMedia-Karte zu kopieren wechseln Sie wieder
+in die Palmdarstellung und tippen die zu kopierende Datei an (dabei sollten Sie
+wieder sicherstellen, daß Modus unten rechts auf Kopieren <img src=modecopy.gif> steht).
+Nach dem Antippen der Datei (Bild&nbsp;17) wird eine Kopie auf der Smartmedia-Karte im
+aktuell ausgewählten Verzeichnis angelegt (Bild&nbsp;18). In diesem Fall ist der aktuelle
+Inhalt der Merkzettel-Anwendung auf der SmartMedia-Karte gesichert und kann jederzeit
+wieder hergestellt werden.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=newdir3.gif><br>Bild&nbsp;16: Das neue Verzeichnis ist leer</h5></center></td>
+<td><center><h5><IMG SRC=builtinmemo.gif><br>Bild&nbsp;17: Die Merkzettel-Datenbank</h5></center></td>
+<td><center><h5><IMG SRC=newdir4.gif><br>Bild&nbsp;18: Die Kopie der Merkzettel-Datei</h5></center></td>
+</tr></table>
+
+<a name=modi><h3>Weitere Modi</h3></a>
+Neben dem Kopiermodus <img src=copy_n.gif>, gibt es zwei weitere Modi, den 
+Verschiebemodus <img src=move.gif> und den Löschmodus <img src=del.gif>.
+
+<dl>
+<dt><img src=copy_n.gif>&nbsp; Der Kopiermodus legt lediglich eine Kopie
+der Quell-Datenbank an, die dabei unberührt bleibt.</dt>
+<dt><img src=move.gif>&nbsp; Im Verschiebemodus wird die Quell-Datenbank
+nach der Übertragung gelöscht.</dt>
+<dt><img src=del.gif>&nbsp; Im Löschmodus wird die angetippte Datenbank 
+vom Palm bzw. der SmartMedia-Karte entfernt.</dt>
+</dl>
+
+Im Gegensatz zum Kopiermodus, werden beim Verschiebe- und Löschmodus 
+Daten vom Palm bzw. der SmartMedia-Karte entfernt. Da es dabei zu
+ungewolltem Datenverlust kommen kann ist es möglich, im Präferenzdialog 
+(Bild&nbsp;19) Sicherheitsabfragen zum Verschieben und Löschen einzuschalten.
+Bild&nbsp;20 zeigt die Sicherheitsabfrage für das Löschen von Datenbanken.<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=prefs.gif><br>Bild&nbsp;19: Die Präferenzen</h5></center></td>
+<td><center><h5><IMG SRC=delete.gif><br>Bild&nbsp;20: Lösch-Sicherheitsabfrage</h5></center></td>
+<td><center><h5><IMG SRC=builtin2.gif><br>Bild&nbsp;21: Die eingebauten Programme </h5></center></td>
+</tr></table>
+
+Ein weiterer Punkt im Präferenzmenü erlaubt es, ROM basierte Datenbanken 
+und Programme in
+der Palmdarstellung auszublenden. Bild&nbsp;21 zeigt die gleiche Ansicht der 
+eingebauten Programme (Built-In) wie Bild&nbsp;4, allerdings ohne die 
+ROM-basierten Dateien. Übrig bleiben die Datenbanken der eingebauten Programme.
+
+<a name=format><h3>Formatieren von SmartMedia-Karten</h3></a>
+SmartMedia-Karten sind in ihrer Funktion an Disketten angelehnt, von
+denen sie das DOS-Dateiformat übernommen haben. Eine SmartMedia-Karte
+wird ab Werk bereits entsprechend vorbereitet und sollte sofort mit
+Daten beschrieben werden können.<p>
+
+Es ist jedoch möglich, daß das DOS-Dateisystem auf der SmartMedia-Karte
+beschädigt ist. Das kann passieren, wenn zum Beispiel die SmartMedia-Karte
+während schreibenden Zugriffen aus dem Palm Pilot entfernt wird 
+(siehe <a href=#kartensymbol>Das Kartensymbol</a>). Aber auch andere
+Geräte (zum Beispiel PC-Adapter, digitale Foto-Kameras oder MP3-Spieler)
+können den Inhalt einer SmartMedia-Karte so verändern, daß er nicht mehr
+der SmartMedia-Spezifikation entspricht. In einem solchen Fall muß das
+auf der Karte enthaltene Dateisystem wieder neu initialisiert werden,
+wenn die Karte mit axxPac benutzt werden soll.
+Im Menü existiert dafür der Eintrag <b>Format Media</b>(Bild&nbsp;13), mit
+dem die SmartMedia-Karte einer Diskette gleich in wenigen Sekunden 
+vollständig gelöscht (Bild&nbsp;22) und mit einem neuen, leeren Dateisystem 
+versehen werden kann. Seien Sie mit dieser Funktion vorsichtigt, nach dem
+Formatieren sind die auf der vorher auf der Karte enthaltenen Daten 
+unwiderbringlich verloren (Bild&nbsp;23).<p>
+
+<table border=0 width=100%><tr>
+<td><center><h5><IMG SRC=format.gif><br>Bild&nbsp;22: Die Karte wird formatiert ...</h5></center></td>
+<td><center><h5><IMG SRC=empty.gif><br>Bild&nbsp;23: ...und ist danach leer.</h5></center></td>
+<td><center><h5><IMG SRC=info.gif><br>Bild&nbsp;24: Karten-Informationen</h5></center></td>
+</tr></table>
+
+Besonders interessant kann diese Funktion mit einigen MP3-Spielern
+sein, die das vorgegebene Dateisystem bewußt verändern und die 
+SmartMedia-Karte damit z.B. auch für digitale Kameras unbrauchbar machen.
+Die Formatierfunktion von axxPac kann solche Karten auch für
+andere Geräte wieder nutzbar machen.<p>
+
+Einen etwas genaueren Einblick in die Interna einer SmartMedia-Karte erlaubt der 
+Menüpunkt <b>Media Info</b>(Bild&nbsp;13). Wie in Bild&nbsp;24 am Beispiel
+einer 4 Megabytes großen Karte von Toshiba dargestellt kann hier
+die interne Speicherkonfiguration eingesehen werden. Neben Hersteller
+und Typ der Karte werden zusätzliche Informationen angezeigt, die
+bei der zukünftigen Einbindung weiterer SmartMedia-Karten von
+Interesse sind. Da die im Bild dargestellte Karte gerade formatiert
+wurde kann man gut sehen, daß die Karte kaum benutzten Blöcke enthält.
+Lediglich wenig Blöcke sind durch Verwaltungsinformationen belegt
+bzw. als unbenutzbar markiert worden.
+</BODY></HTML>
+
+
+

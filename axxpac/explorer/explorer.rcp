@@ -1,0 +1,473 @@
+//
+// explorer.rcp : Resource file for axxPac explorer (now axxPac shell)
+//
+
+#include "explorerRsc.h"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+	TITLE "axxPac"
+
+ 	SCROLLBAR ID scl_Main AT (153 17 7 128) USABLE VALUE 0 MIN 0 MAX 0 PAGESIZE 10
+
+	PUSHBUTTON "Palm"  ID DispPalm  AT (          1        160-12 24 11) GROUP 1 
+	PUSHBUTTON "Card"  ID DispCard  AT (PREVRIGHT+1       PREVTOP 24 11) GROUP 1
+
+	/* text buttons */
+	PUSHBUTTON "Del"   ID SelDelete AT (RIGHT@159         PREVTOP 24 11) GROUP 2
+	PUSHBUTTON "Move"  ID SelMove   AT (RIGHT@PREVLEFT-1  PREVTOP 24 11) GROUP 2
+	PUSHBUTTON "Copy"  ID SelCopy   AT (RIGHT@PREVLEFT-1  PREVTOP 24 11) GROUP 2
+	PUSHBUTTON "Info"  ID SelInfo   AT (RIGHT@PREVLEFT-1  PREVTOP 24 11) GROUP 2
+END
+
+FORM ID frm_About at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "axxPac Shell 2.19"
+
+	FORMBITMAP AT (78-32 20) BITMAP AboutLogo
+
+	LABEL 	"\251 1999-2001" AUTOID AT (CENTER PREVTOP+70)
+	LABEL   "AMS Software & Elekronik GmbH" AUTOID AT (CENTER PREVBOTTOM+2)
+
+	LABEL 	"http://www.axxpac.de"         AUTOID AT (CENTER PREVBOTTOM+2)
+	
+	BUTTON "OK" ID AboutOK AT (CENTER 140 32 AUTO) FONT 1
+END
+
+BITMAP ID AboutLogo   "ams64x64.bmp"
+
+FORM ID frm_View at ( 2 2 156 156 ) USABLE MODAL SAVEBEHIND
+BEGIN
+	TITLE "Text View"
+
+     	FIELD ID ViewField AT (4 15 144 121) NONEDITABLE MULTIPLELINES MAXCHARS 4096
+	SCROLLBAR ID ViewScrollbar AT (148 15 7 121)
+
+     	BUTTON "OK"                  ID ViewOK     AT ( 4 141 30 AUTO)
+     	BUTTON "Install in Memopad"  ID ViewInst   AT ( RIGHT@152 141 100 AUTO)
+END
+
+FORM ID frm_Card at  ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "SmartMedia Card Info"
+
+     	LABEL "Library:" ID CardLblLib   AT (10 15)               FONT 0
+     	LABEL "Version"  ID CardLblVer   AT (60 PREVTOP)          FONT 1
+     	LABEL "0"        ID CardLibVer   AT (PREVRIGHT+2 PREVTOP) FONT 1
+
+     	LABEL "No card inserted!" ID CardNone AT (10 PREVBOTTOM)  FONT 1 NONUSABLE
+
+     	LABEL "Vendor:" ID CardLblVendor AT (10 PREVTOP)      FONT 0 
+     	LABEL "0"       ID CardVendor    AT (60 PREVTOP)      FONT 1 
+     	LABEL "Type:"   ID CardLblType   AT (10 PREVBOTTOM)   FONT 0 	
+     	LABEL "0"       ID CardType      AT (60 PREVTOP)      FONT 1 
+
+     	LABEL "Size:"   ID CardLblSize   AT (10 PREVBOTTOM)   FONT 0 	
+     	LABEL "0"       ID CardSize      AT (60 PREVTOP)      FONT 1 
+
+     	LABEL "Block information:" ID CardBInfo AT (10 PREVBOTTOM+2)  FONT 0 
+
+     	LABEL "Zone"     ID CardTZone  AT (10 PREVBOTTOM)   FONT 0 
+     	LABEL "Free"     ID CardTFree  AT (40 PREVTOP)      FONT 0 
+     	LABEL "Used"     ID CardTUsed  AT (70 PREVTOP)      FONT 0 
+     	LABEL "Unusable" ID CardTUnus  AT (100 PREVTOP)     FONT 0 
+
+ 	SCROLLBAR ID CardScl AT (140 PREVBOTTOM 7 44) USABLE
+
+     	BUTTON "OK"      ID CardOK     AT (CENTER 140 40 AUTO)
+END
+
+FORM ID frm_Pref at ( 2 2 156 156 ) USABLE MODAL
+HELPID PrefHelp
+BEGIN
+	TITLE "Preferences"
+
+	CHECKBOX "Confirm overwrite"     ID PrefOverwrite AT (20 30 AUTO AUTO)
+	CHECKBOX "Confirm delete"        ID PrefDelete    AT (20 PREVBOTTOM+6 AUTO AUTO)
+	CHECKBOX "Show databases in ROM" ID PrefROM       AT (20 PREVBOTTOM+6 AUTO AUTO)
+	CHECKBOX "Restore view/mode"     ID PrefMode      AT (20 PREVBOTTOM+6 AUTO AUTO)
+
+     	LABEL "Sort by:" AUTOID  AT (20 PREVBOTTOM+6)
+	POPUPTRIGGER "" ID PrefSortSel AT (PrevRight+10 PrevTop 50 AUTO) LEFTANCHOR
+	LIST "Name" "Date/Time" "Size" ID PrefSortLst AT (PrevLeft PrevTop 50 1) NONUSABLE VISIBLEITEMS 3
+        POPUPLIST ID PrefSortSel PrefSortLst
+
+     	BUTTON "OK"     ID PrefOK     AT (30 130 40 AUTO)
+     	BUTTON "Cancel" ID PrefCancel AT (90 PREVTOP 40 AUTO)
+END
+
+STRING ID PrefHelp "The axxPac preferences:\n\n"\
+  "- 'Confirm overwrite' will cause the program to ask for every file "\
+  "to be overwritten (on the Palm as well as on the SmartMedia.\n\n"\
+  "- 'Confirm Delete' will cause the program to ask for every file "\
+  "to be removed (on the Palm as well as on the SmartMedia.\n\n"\
+  "- If 'Show databases in ROM' is checked, all databases on the "\
+  "Palm will be displayed in the 'Palm' view, even if they are read-only "\
+  "(like the built-in applications or programs stored in the flash ROM). "\
+  "The programs in ROM cannot be overwritten or replaced by files from the "\
+  "SmartMedia.\n\n"\
+  "- 'Restore view/mode' will cause the program to restore the palm or card "\
+  "view, the mode and the card path like it was before the program was "\
+  "quit the last time.\n\n"\
+  "- 'Sort by ...' sets the sort mode for the file and database view. 'name' "\
+  "sorts the files alphabetically, 'date/time' sorts them according to their "\
+  "creation time and 'size' sorts them according to their size. In card view "\
+  "this only affects files, directories are always sorted alphabetically."
+
+FORM ID frm_NewDir at ( 2 82 156 76 ) USABLE MODAL
+HELPID NewDirHelp
+BEGIN
+	TITLE "New Directory"
+
+     	LABEL "Name of new directory:" AUTOID  AT (10 20) FONT 0
+     	FIELD ID NewDirName AT (10 PREVBOTTOM+3 136 AUTO) UNDERLINED MAXCHARS 32 FONT 0
+
+     	BUTTON "OK"     ID NewDirOK     AT ( 10 PREVBOTTOM+10 40 AUTO)
+     	BUTTON "Cancel" ID NewDirCancel AT ( PREVRIGHT+10 PREVTOP 40 AUTO)
+	GRAFFITISTATEINDICATOR 136 PREVTOP+1
+END
+
+STRING ID NewDirHelp "Using this dialog will create a new directory "\
+  "on the SmartMedia. A valid directory name must consist of at least "\
+  "one character or digit and must begin with a character or digit."
+
+FORM ID frm_FileInfo at ( 2 53 156 105 ) USABLE MODAL
+BEGIN
+	TITLE "File Info"
+
+     	LABEL "Name:" AUTOID  AT (10 16) FONT 0
+     	FIELD ID FileInfoName AT (40 PREVTOP 106 AUTO) UNDERLINED MAXCHARS 32 FONT 1
+
+	LABEL "Size:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "0" FileInfoSize AT (40 PREVTOP) FONT 1
+
+	LABEL "Date:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "0" FileInfoDate AT (40 PREVTOP) FONT 1
+
+	LABEL "Time:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "0" FileInfoTime AT (40 PREVTOP) FONT 1
+
+	CHECKBOX "SubDir"   ID FileInfoDir AT (10 PREVBOTTOM+1 AUTO AUTO) DISABLED
+	CHECKBOX "Read Only" ID FileInfoRO  AT (PREVRIGHT+10 PREVTOP AUTO AUTO) DISABLED
+	GRAFFITISTATEINDICATOR PREVRIGHT+10 PREVTOP+1
+
+     	BUTTON "OK"     ID FileInfoOK     AT ( 10 PREVBOTTOM+6 30 AUTO)
+     	BUTTON "Cancel" ID FileInfoCancel AT ( PREVRIGHT+6 PREVTOP 30 AUTO)
+
+     	BUTTON "Move"   ID FileInfoMove   AT (PREVRIGHT+6 PREVTOP 30 AUTO)
+
+     	BUTTON "View"   ID FileInfoPlugin AT (PREVRIGHT+6 PREVTOP 30 AUTO)
+     	BUTTON "Beam"   ID FileInfoBeam   AT (PREVLEFT    PREVTOP 30 AUTO)
+END
+
+FORM ID frm_MemoSel at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "Export Memo to Card"
+
+        SCROLLBAR ID MemoScrollbar AT (138 21 7 108) USABLE VALUE 0 MIN 0 MAX 0 PAGESIZE 8
+	BUTTON "" ID MemoName0 AT (10 20 127 11) NOFRAME
+	BUTTON "" ID MemoName1 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName2 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName3 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName4 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName5 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName6 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName7 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName8 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+	BUTTON "" ID MemoName9 AT (10 PREVBOTTOM PREVWIDTH 11) NOFRAME
+
+	BUTTON "Cancel" ID MemoCancel AT (10 138 40 AUTO)
+END
+
+FORM ID frm_PlugCfg at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "Plugin Configuration"
+
+     	LABEL "---" ID PlugCfg1Name AT (10 16)
+     	BUTTON "config" ID PlugCfg1 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg2Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg2 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg3Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg3 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg4Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg4 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg5Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg5 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg6Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg6 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg7Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg7 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	LABEL "---" ID PlugCfg8Name AT (10 PREVBOTTOM+4)
+     	BUTTON "config" ID PlugCfg8 AT (PREVRIGHT+93 PREVTOP 32 11)
+
+     	BUTTON "Ok"   ID PlugCfgOk AT (CENTER 140 35 AUTO)
+END
+
+FORM ID frm_Options at ( 2 2 156 156 ) USABLE MODAL
+HELPID OptionsHelp
+BEGIN
+	TITLE "Backup Options"
+
+	CHECKBOX "Automatic daily backup"  ID OptionsAuto AT (3 16 AUTO AUTO)
+
+     	LABEL "Last successful backup:" AUTOID AT (6 PREVBOTTOM+3)
+     	LABEL "- no backup time stored -" ID OptionsTime AT (6 PREVBOTTOM) FONT 1
+
+     	LABEL "Exclude databases from backup:" AUTOID AT (6 PREVBOTTOM+3)
+
+	CHECKBOX "creator"  ID OptionsECreat0 AT (3 PREVBOTTOM+2 AUTO AUTO)
+     	FIELD ID OptionsCreat0 AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+	CHECKBOX "type"     ID OptionsEType0  AT (PREVRIGHT PREVTOP AUTO AUTO)
+     	FIELD ID OptionsType0  AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+
+	CHECKBOX "creator"  ID OptionsECreat1 AT (3 PREVBOTTOM+2 AUTO AUTO)
+     	FIELD ID OptionsCreat1 AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+	CHECKBOX "type"     ID OptionsEType1  AT (PREVRIGHT PREVTOP AUTO AUTO)
+     	FIELD ID OptionsType1  AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+
+	CHECKBOX "creator"  ID OptionsECreat2 AT (3 PREVBOTTOM+2 AUTO AUTO)
+     	FIELD ID OptionsCreat2 AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+	CHECKBOX "type"     ID OptionsEType2  AT (PREVRIGHT PREVTOP AUTO AUTO)
+     	FIELD ID OptionsType2  AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+
+	CHECKBOX "creator"  ID OptionsECreat3 AT (3 PREVBOTTOM+2 AUTO AUTO)
+     	FIELD ID OptionsCreat3 AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+	CHECKBOX "type"     ID OptionsEType3  AT (PREVRIGHT PREVTOP AUTO AUTO)
+     	FIELD ID OptionsType3  AT (PREVRIGHT+2 PREVTOP 30 AUTO) UNDERLINED EDITABLE MAXCHARS 4
+
+     	BUTTON "OK"     ID OptionsOK     AT ( 6 PREVBOTTOM+10 40 AUTO)
+     	BUTTON "Cancel" ID OptionsCancel AT ( PREVRIGHT+10 PREVTOP 40 AUTO)
+	GRAFFITISTATEINDICATOR 136 PREVTOP+1
+END
+
+STRING ID OptionsHelp "Select 'Automatic daily backup' to have your palm backed "\
+  "up every day at midnight automatically. The date of the last successful backup "\
+  "is displayed in the Options dialog.\n\n"\
+  "Furthermore, this dialog allows to exclude specific databases from being "\
+  "copied to the backup directory during backup.\n\nDatabases can be excluded from "\
+  "backup by its creator id or type. These values can be obtained from the info "\
+  "dialog in the main view. To exclude e.g. the addressbooks database from the backup "\
+  "go to the main view, select [Built-In], and get the database info for the "\
+  "AddressDB. The creator ID of this database is 'addr' and the type 'DATA'. "\
+  "To exclude all databases of the addressbook from backup (incl. the program "\
+  "and all other databases of the addressbook) enter 'addr' into the first creator "\
+  "entry and enable it. In order to exclude only the address database enter the "\
+  "type 'DATA' and enable it as well. Using the type field only usually isn't "\
+  "very useful, since this excludes all files of this type regardless of the "\
+  "creator from the backup.\n\nUsing this option will not erase databases already "\
+  "stored in the backup directory. Please remove them manually."
+
+FORM ID frm_DbInfo at ( 2 2 156 156 ) USABLE MODAL
+BEGIN
+	TITLE "Database Info"
+
+     	LABEL "Name:" AUTOID  AT (10 18) FONT 0
+     	LABEL "0" ID DbName AT (50 PREVTOP) FONT 1
+
+     	LABEL "Version:" AUTOID  AT (10 PREVBOTTOM+1) FONT 0
+     	LABEL "0" ID DbVersion AT (50 PREVTOP) FONT 1
+
+	LABEL "Size:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "00" ID DbEntries AT (50 PREVTOP) FONT 1
+	LABEL "00" ID DbSize AT (50 PREVBOTTOM-1) FONT 1
+
+	LABEL "Date:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "00" ID DbDate AT (50 PREVTOP) FONT 1
+
+	LABEL "Time:" AUTOID AT (10 PREVBOTTOM+1)
+	LABEL "00" ID DbTime AT (50 PREVTOP) FONT 1
+
+	PUSHBUTTON "Rsrc" ID DbRsrc AT (10 PREVBOTTOM+6 30 11) DISABLED
+	PUSHBUTTON "Rec"  ID DbRec  AT (PREVRIGHT+1 PREVTOP 30 11) DISABLED
+	CHECKBOX "Read Only"  ID DbRO  AT (PREVRIGHT+10 PREVTOP AUTO AUTO) DISABLED
+
+	LABEL "Creator:" AUTOID AT (10 PREVBOTTOM+5)
+	LABEL "ABCD" DbCreator AT (PREVRIGHT+3 PREVTOP) FONT 1
+	LABEL "Type:" AUTOID AT (PREVRIGHT+10 PREVTOP)
+	LABEL "ABCD" DbType AT (PREVRIGHT+3 PREVTOP) FONT 1
+
+     	BUTTON "OK"     ID DbOk     AT (CENTER PREVBOTTOM+8 40 AUTO)
+END
+
+FORM ID frm_Auto at (10 38 140 75) USABLE MODAL
+BEGIN
+	TITLE "Daily axxPac backup"
+END
+
+BITMAP ID IconError     "error.bmp"
+BITMAP ID IconInserted  "card.bmp"
+BITMAP ID IconBusy      "busy.bmp"
+BITMAP ID IconFolder    "folder.bmp"
+BITMAP ID IconSync      "sync.bmp"
+BITMAP ID IconText      "text.bmp"
+BITMAP ID IconDB        "sync_db.bmp"
+
+MENU ID mnu_Main
+BEGIN
+  PULLDOWN "axxPac"
+  BEGIN
+    MENUITEM "About"                ID menuAbout       "A"
+    MENUITEM SEPARATOR
+    MENUITEM "Export Memo"          ID menuMemoExp     "E"
+    MENUITEM SEPARATOR
+    MENUITEM "New Directory"        ID menuNewDir      "N"
+    MENUITEM "Format Media"         ID menuFormat      "F"
+    MENUITEM "Media Info"           ID menuCard        "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Preferences"          ID menuPref        "P"
+    MENUITEM "Config Plugins"       ID menuPlug        "C"
+  END
+  PULLDOWN "Backup"
+  BEGIN
+    MENUITEM "Backup"               ID menuBackup      "B"
+    MENUITEM "Restore"              ID menuRestore     "R"
+    MENUITEM SEPARATOR
+    MENUITEM "Options"              ID menuOptions     "O"
+  END
+END
+
+/* error messages */
+
+/* db.c errors */
+STRING ID StrNoPrcPdb   "Not a Palm OS installable file."
+STRING ID StrNoPalmDB   "Not a valid PalmOS database file."
+STRING ID StrExtRec     "Don't know how to handle extended record ID, please contact AMS."
+STRING ID StrSortInfo   "Don't know how to handle SortInfoArea, please contact AMS."
+STRING ID StrFindDB     "Unable to find database."
+STRING ID StrDeleteDB   "Unable to delete database."
+STRING ID StrLibVer     "Outdated driver library installed. Please install the latest axxPacDrv."
+STRING ID StrFindFile   "Can't find file or database."
+STRING ID StrOpenDB     "Unable to open database."
+STRING ID StrMemBuf     "Out of memory allocating buffer space."
+STRING ID StrLstOOMDir  "Out of memory while allocating card directory buffer."
+STRING ID StrMemRec     "Out of memory allocating record space."
+STRING ID StrNoMemo     "No memo installed."
+
+Alert ID alt_err
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "^1"
+
+  BUTTONS "OK"
+END
+
+ALERT ID alt_err2
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "^1: ^2"
+
+  BUTTONS "OK"
+END
+
+ALERT ID alt_copy2memo
+CONFIRMATION
+DEFAULTBUTTON 1
+BEGIN
+  TITLE "Copy to Memopad"
+  MESSAGE "Copy the file ^1 to the memopad?"
+
+  BUTTONS "OK" "Cancel"
+END
+
+Alert ID alt_overwrite
+CONFIRMATION
+DEFAULTBUTTON 1
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Overwrite existing file ^1?"
+
+  BUTTONS "Yes" "No"
+END
+
+Alert ID alt_delete
+CONFIRMATION
+DEFAULTBUTTON 1
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Delete the file ^1?"
+
+  BUTTONS "Yes" "No"
+END
+
+Alert ID alt_delsub
+CONFIRMATION
+DEFAULTBUTTON 1
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Delete the directory ^1 and all its files?"
+
+  BUTTONS "Yes" "No"
+END
+
+Alert ID alt_sdfull
+ERROR
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "The directory ^1 cannot be removed, because it contains further directories."
+
+  BUTTONS "Ok"
+END
+
+Alert ID alt_format
+CONFIRMATION
+DEFAULTBUTTON 1
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Really format the memory card? All data on the card will be lost!"
+
+  BUTTONS "Yes" "No"
+END
+
+Alert ID alt_noplug
+ERROR
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "No Plugins installed."
+
+  BUTTONS "Ok"
+END
+
+Alert ID alt_backup
+ERROR
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Backup all RAM based databases into '/backup' directory?\nAll existing files in the '/backup' directory will be lost."
+
+  BUTTONS "Yes" "No"
+END
+
+Alert ID alt_restore
+ERROR
+BEGIN
+  TITLE "axxPac"
+
+  MESSAGE "Restore all RAM based databases from '/backup' directory?\nThis will replace all current data on your palm."
+
+  BUTTONS "Yes" "No"
+END
+
+ICON "explorer.bmp"
+SMALLICON "explorer_sm.bmp"
+
+VERSION ID 1 "2.19"
+
+
+
+

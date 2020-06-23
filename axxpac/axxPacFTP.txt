@@ -1,0 +1,102 @@
+axxPacFTP.prc V1.1   - GPL'd -       (c) 2000 Till Harbaum
+-------------------------------------------------------------
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+- INTRODUCTION
+The axxPac FTP client allows you to up- and download files
+from and to FTP servers to and from your axxPac SmartMedia
+card.
+
+For details about the axxPac have a look at www.axxpac.de
+
+- WHY DO I WANT TO ACCESS A FTP SERVER?
+Because this way you can do lots of cool things with your
+axxPac. You can download palm software (PRC and PDB files)
+directly to your SmartMedia card and then use the axxPac
+shell to install these files on your palm.
+
+Or you can take some snapshots with your digital camera,
+select the best shots with the axxPac JPEG plugin and finally
+upload them to your homepage using the axxPac FTP client.
+
+- SYSTEM REQUIREMENTS
+The axxPac FTP requires your palm to be axxPac equipped 
+and you need at least version 1.11 of the axxPac Drviver. 
+Both can be found at www.axxpac.de
+
+- INSTALLATION
+To install the FTP client, just hotsync axxPacFTP.prc to your
+Palm device. After successful installation, you'll find
+an FTP icon to be added to the launcher application.
+
+- USAGE
+To start working with the FTP client you need to have a
+working network setup for your palm. This may either be
+via the Palm Pilot Modem or via a direct PPP connection
+either via RS232 using your cradle or HotSync cable or
+via IrDA.
+
+After the connection to the network services is established,
+the program asks you to specify the name of the FTP server
+to contact (e.g. ftp.microsoft.com) and the user name
+and password to use. For public servers (like the microsoft
+server), you usually use 'ftp' or 'anonymous' as the user
+name and your email address for the password. 
+
+As soon as you are logged into the server, you can walk
+around in the file system of that server and upload and
+download files.
+
+- HOW TO SETUP NETWORKING WITH THE PALM
+There a several ways of connecting the palm to the internet.
+
+For details on how to connect to the net using the
+palm pilot modem refer to the manual of your palm
+pilot modem.
+
+To connect via a Siemens S25 mobile or via a linux
+machine e.g. refer to
+  http://www.palmobil.de/palm2s25-eng/index.html
+
+To connect via your Win95/98 PC at home e.g. refer to
+  http://www.mochasoft.dk/palm.html#palmppp
+
+- KNOWN BUGS/LIMITATIONS
+
+- The current version does not support dynamic links.
+  Links are not displayed and can't be selected.
+
+- The current version does not cope with filenames
+  containing spaces.
+
+- The current version parses the file listing according 
+  to the unix ls command. Tests with a Windows2000 based
+  server (ftp.microsoft.com) showed, that they are using
+  the same pattern. However, there may be servers out
+  there using their own format. So if you get some
+  weird file listings or even crashes whenever connecting
+  to a particular server, please try to log onto that
+  server from your host and see whether a 'ls' gives
+  you some strange formatted output or just email me
+  the server name (if it's a public server, otherwise
+  you have a problem :-).
+
+- CONTACT
+EMail: T.Harbaum@tu-bs.de
+WWW:   http://www.ibr.cs.tu-bs.de/~harbaum/pilot
+
+Have fun,
+  Till

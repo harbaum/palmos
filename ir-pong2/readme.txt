@@ -1,0 +1,69 @@
+IR Pong 2.1 by Till Harbaum (palm@harbaum.org)
+----------------------------------------------
+
+IR Pong 2.1 is a two player action game for the Palm Pilot. You'll need a
+palm with infrared or bluetooth capabilities and a second person with
+a similar machine to play this game in two player mode.
+
+Game facts:
+- Color and grayscale support
+- Infrared or Bluetooth (still beta) communication
+- ability to shoot at bricks and opponent
+- destructable bricks
+- up to three balls in game
+- game keeps track of all opponents you've ever played against 
+- built-in beam capability
+- practice mode
+
+Run the two player game
+
+Start the game on both machines, place the machines that the infrared
+interfaces can 'see' each other and tap the 'Start two player game'
+button on one machine to start the game. The machine that was used to
+start the game will be the 'master' machine which is controlling the
+game.
+
+It is your turn to prevent the ball from leaving the screen to the
+bottom. The other player will try this at the opposite side of the
+screen. Once the ball leaves the screen on your side, the score of the
+other player is increased. At the top of the screen the score for the
+current match is displayed.  If there is no game in progress, the
+overall lost and won games are displayed in the main window.
+
+Stopping the game
+You can stop the game in several ways: 
+
+- Select 'disconnect' from the menu will stop the game and
+  return to the start screen.
+
+- Quiting the game on one machine will cause the game to stop
+  on the other machine, too (that machine will complain about
+  a lost connection).
+
+- Interrupting the IR connection (by removing the machines)
+  will cause the IR connection to fail and end the current 
+  game.
+
+The Setup
+
+Use the setup menu to change the game settings. It is recommended to
+stop a running game before going to the setup.
+
+You may configure the game using the 'setup' menu. There are two
+kind of settings, local settings and global settings. Local settings
+only affect the local machine and have no effect on the
+opponent. Global settings are set by the master and are valid for both
+machines. The setup allows you to:
+  
+- Switch sound on/off
+- Select your paddle speed,
+- Select the board layout to play on (random selects a new
+  layout for each new match)
+- Select the ball speed
+- Select the speed increase of the ball.
+
+
+
+
+
+

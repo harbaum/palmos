@@ -1,0 +1,93 @@
+# axxPac JPEG plugin library
+
+LIBNAME   = axxPacJPEG
+CREATOR   = axP0
+
+TOOLBASE = m68k-palmos-coff-
+CC = $(TOOLBASE)gcc -nostartfiles
+OBJRES = $(TOOLBASE)obj-res
+BUILDPRC = build-prc -L
+CSFLAGS = -O2 -S
+CFLAGS = -O2 -DCREATOR=\'$(CREATOR)\' -fexpensive-optimizations -DPALM
+PILRC = pilrc
+
+OBJECTS= jpeg_view.o config.o jcomapi.o jdapimin.o jdapistd.o \
+        jdatadst.o jdatasrc.o jdcoefct.o jdcolor.o jddctmgr.o jdhuff.o \
+        jdinput.o jdmainct.o jdmaster.o jdmerge.o jdphuff.o \
+        jdsample.o jdtrans.o jerror.o jidctred.o jutils.o jmemmgr.o \
+	jdpostct.o jdmarker.o djpeg.o palmview.o jmempalm.o
+
+all: ../$(LIBNAME).prc
+
+jpeg_view.o: jpeg_view.c
+	$(CC) $(CFLAGS) -c $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) -fomit-frame-pointer -c $<
+
+../$(LIBNAME).prc: libr0000.$(LIBNAME).grc res.stamp
+	$(BUILDPRC) $@ "axxPac JPEG plugin" $(CREATOR)\
+			 libr0000.$(LIBNAME).grc *.bin
+	m68k-palmos-coff-objdump --section-headers $(LIBNAME)
+
+libr0000.$(LIBNAME).grc: $(LIBNAME)
+	$(OBJRES) $(LIBNAME)
+	rm -f {code,pref,data}0000.$(LIBNAME).grc
+	mv code0001.$(LIBNAME).grc libr0000.$(LIBNAME).grc
+
+res.stamp: config.rcp config.h
+	$(PILRC) config.rcp .
+	touch res.stamp
+
+$(LIBNAME): $(OBJECTS)
+	$(CC) -shared -o $(LIBNAME) $(OBJECTS)
+
+clean:
+	rm -f *.grc *.o $(LIBNAME) *~ res.stamp
+
+depend:
+	makedepend *.c
+
+# DO NOT DELETE
+
+config.o: ../api/axxPac.h jinclude.h jconfig.h cdjpeg.h jpeglib.h jmorecfg.h
+config.o: jerror.h cderror.h config.h
+djpeg.o: jinclude.h ../api/axxPac.h jconfig.h cdjpeg.h jpeglib.h jmorecfg.h
+djpeg.o: jerror.h cderror.h jversion.h /usr/include/ctype.h
+djpeg.o: /usr/include/features.h /usr/include/sys/cdefs.h
+djpeg.o: /usr/include/gnu/stubs.h /usr/include/bits/types.h
+djpeg.o: /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h
+djpeg.o: /usr/include/endian.h /usr/include/bits/endian.h
+jcomapi.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdapimin.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdapistd.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdatadst.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdatadst.o: jerror.h
+jdatasrc.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdatasrc.o: jerror.h
+jdcoefct.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdcolor.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jddctmgr.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h jdct.h
+jdhuff.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h jdhuff.h
+jdinput.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdmainct.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdmarker.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdmaster.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdmerge.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdphuff.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h jdhuff.h
+jdpostct.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdsample.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jdtrans.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jerror.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jerror.o: jversion.h jerror.h
+jidctred.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h jdct.h
+jmemmgr.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jmemmgr.o: jmemsys.h
+jmempalm.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+jmempalm.o: jmemsys.h
+jpeg_view.o: ../api/axxPac.h jinclude.h jconfig.h
+jutils.o: jinclude.h ../api/axxPac.h jconfig.h jpeglib.h jmorecfg.h
+palmview.o: ../api/axxPac.h jinclude.h jconfig.h cdjpeg.h jpeglib.h
+palmview.o: jmorecfg.h jerror.h cderror.h
+viewpalm.o: cdjpeg.h jinclude.h ../api/axxPac.h jconfig.h jpeglib.h
+viewpalm.o: jmorecfg.h jerror.h cderror.h
