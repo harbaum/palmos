@@ -1,0 +1,221 @@
+//
+// Rsc.rcp : Resource file for the BlueBlocks application.
+//
+
+LAUNCHERCATEGORY "Games"
+CATEGORIES ID 100 "Unfiled" "Bluetooth" "Games"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+MENUID mnu_Main
+BEGIN
+      TITLE "BlueBlocks"
+
+      FORMBITMAP AT (0 16) BITMAP background
+
+      BUTTON "Start" ID btn_Start AT (CENTER@120 75 50 AUTO) FONT 1 USABLE
+      BUTTON "Join"  ID btn_Join  AT (CENTER@120 92 50 AUTO) FONT 1 USABLE
+END
+
+
+MENU ID mnu_Main
+BEGIN
+        PULLDOWN "BlueBlocks"
+        BEGIN
+                MENUITEM "About..." ID mit_About "A"
+        END
+END
+
+FORM ID frm_Discovery at ( 2 2 156 156 ) USABLE MODAL SAVEBEHIND
+BEGIN
+	TITLE "Device Discovery"
+
+     	FIELD ID fld_devices AT (4 15 144 121) NONEDITABLE MULTIPLELINES MAXCHARS 4096 FONT 1
+	SCROLLBAR ID scl_devices AT (148 15 7 121)
+
+     	BUTTON "Done" ID btn_Ok AT ( 4 141 AUTO AUTO)
+END
+
+ALERT ID alt_About
+INFORMATION
+BEGIN
+        TITLE "About BlueBlocks"
+
+        MESSAGE "BlueBlocks - \n"\
+	        "Copyright (c) 2003\n"\
+		"by Dr. Till Harbaum"
+
+        BUTTONS "OK"
+END
+
+ALERT ID alt_err
+ERROR
+BEGIN
+	TITLE "IR Pong 2 - Error"
+	MESSAGE "^1"
+	BUTTONS "OK"
+END
+
+ALERT ID alt_bt_err
+ERROR
+BEGIN
+	TITLE "BlueBlocks - Bluetooth Error"
+	MESSAGE "^1: ^2"
+	BUTTONS "OK"
+END
+
+ALERT ID alt_wrongOs
+ERROR
+BEGIN
+	TITLE "BlueBricks - OS Error"
+	MESSAGE "This game requires at least PalmOS 3.0."
+	BUTTONS "OK"
+END
+
+ALERT ID alt_ClickMe
+INFORMATION
+BEGIN
+        TITLE "Hey!"
+        MESSAGE "You clicked me!"
+        BUTTONS "Sure did."
+END
+
+// the application icon
+ICONFAMILYEX
+BEGIN
+	BITMAP "icons/icon.1.bmp" BPP 1 
+	BITMAP "icons/icon.4.bmp" BPP 4 DENSITY 72
+	BITMAP "icons/icon.8.bmp" BPP 8 DENSITY 72
+	BITMAP "icons/icon_d.8.bmp" BPP 8 DENSITY 144
+END
+
+SMALLICONFAMILYEX
+BEGIN
+	BITMAP "icons/icon_sm.1.bmp" BPP 1 
+	BITMAP "icons/icon_sm.4.bmp" BPP 4 DENSITY 72
+	BITMAP "icons/icon_sm.8.bmp" BPP 8 DENSITY 72
+	BITMAP "icons/icon_sm_d.8.bmp" BPP 8 DENSITY 144
+END
+
+// the game element bitmaps, a small bw one, a small gray one,
+// a small color one and a big color one
+BITMAPFAMILYEX ID block_red
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_red.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_red.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_red.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_green
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_green.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_green.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_green.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_blue
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_blue.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_blue.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_blue.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_yellow
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_yellow.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_yellow.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_yellow.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_magenta
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_magenta.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_magenta.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_magenta.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_cyan
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_cyan.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_cyan.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_cyan.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_grey
+BEGIN
+	BITMAP "graphics/block.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_grey.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_grey.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_d_grey.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_red
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_red.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_red.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_red.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_green
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_green.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_green.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_green.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_blue
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_blue.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_blue.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_blue.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_yellow
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_yellow.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_yellow.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_yellow.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_magenta
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_magenta.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_magenta.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_magenta.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_cyan
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_cyan.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_cyan.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_cyan.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID block_sm_grey
+BEGIN
+	BITMAP "graphics/block_sm.1.bmp" NOCOMPRESS BPP 1 
+	BITMAP "graphics/block_sm_grey.4.bmp" BPP 4 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_grey.8.bmp" BPP 8 NOCOMPRESS DENSITY 72
+	BITMAP "graphics/block_sm_d_grey.8.bmp" BPP 8 NOCOMPRESS DENSITY 144
+END
+
+BITMAPFAMILYEX ID background
+COMPRESS
+BEGIN
+	BITMAP "graphics/bg.1.bmp" BPP 1 
+	BITMAP "graphics/bg.4.bmp" BPP 4 COMPRESSBEST DENSITY 72
+	BITMAP "graphics/bg.8.bmp" BPP 8 COMPRESSBEST DENSITY 72
+//	BITMAP "graphics/bg_d.8.bmp" BPP 8 COMPRESSBEST DENSITY 144
+END
+
