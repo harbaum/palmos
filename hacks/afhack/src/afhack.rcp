@@ -1,0 +1,61 @@
+TRAP ID 1000 0xa2a2
+
+//    LABEL "This version has been" AUTOID AT (CENTER PREVBOTTOM)
+//    LABEL "registered for Danny Soo!" AUTOID AT (CENTER PREVBOTTOM)    
+
+FORM ID 3000 AT (2 2 156 156) Modal
+BEGIN
+    TITLE "Auto Fire Hack 1.1"
+
+    LABEL "(c) 2000 by Till Harbaum" AUTOID AT (CENTER 20)
+
+    LABEL "AutoFireHack is nag free Shareware," AUTOID AT (CENTER PREVBOTTOM+5)
+    LABEL "please register at www.palmgear.com" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "or send $5 (or DM10,-) to:" AUTOID AT (CENTER PREVBOTTOM)
+
+    LABEL "Till Harbaum" AUTOID AT (CENTER PREVBOTTOM+3)
+    LABEL "Marienstrasse 22a" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "38104 Braunschweig" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "Germany" AUTOID AT (CENTER PREVBOTTOM)
+    
+    BUTTON "OK" ID 5001 AT (CENTER 143 50 10) FRAME
+END
+
+APPLICATIONICONNAME ID 3000 "AutoFireHack"
+
+Form id 2000 at (2 52 156 106) Modal
+HELPID 5200
+BEGIN
+    TITLE "Auto Fire Hack Config."
+
+    LABEL "Rate:  max" AUTOID AT (10 20)
+    PUSHBUTTON "8" ID 5110 AT (PREVRIGHT+3 PREVTOP-2 8 AUTO) GROUP 1
+    PUSHBUTTON "7" ID 5111 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "6" ID 5112 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "5" ID 5113 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "4" ID 5114 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "3" ID 5115 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "2" ID 5116 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    PUSHBUTTON "1" ID 5117 AT (PREVRIGHT+1 PREVTOP 8 AUTO) GROUP 1
+    LABEL "min" AUTOID AT (PREVRIGHT+3 PREVTOP+2)
+
+    LABEL "Select buttons for auto fire:" AUTOID AT (10 36) FONT 0
+
+    PUSHBUTTON "Up"     ID 5100 AT (CENTER 48 30 AUTO)
+    PUSHBUTTON "Date"   ID 5101 AT (CENTER@25  65 30 AUTO)
+    PUSHBUTTON "Addr"   ID 5102 AT (CENTER@61  65 30 AUTO)
+    PUSHBUTTON "ToDo"   ID 5103 AT (CENTER@96  65 30 AUTO)
+    PUSHBUTTON "Memo"   ID 5104 AT (CENTER@131 65 30 AUTO)
+    PUSHBUTTON "Down"   ID 5105 AT (CENTER 82 30 AUTO)
+
+    BUTTON "OK" ID 5001 AT (127 90 20 AUTO) FRAME
+END
+
+STRING ID 5200 "To enable auto fire for a specific hard key, go "\
+"to the preference dialog of AutoFire Hack in hackmaster, "\
+"select the button the game uses for 'fire' (e.g. "\
+"the memo button in zap2000) and from now on the button "\
+"will be pressed and released automatically whenever you "\
+"just hold down that button."
+
+VERSION "1.1"

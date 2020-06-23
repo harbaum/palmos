@@ -1,0 +1,55 @@
+              NoStreak V 1.3 -- (c) 1999 by Till Harbaum
+
+                       t.harbaum@tu-bs.de 
+              http://www.ibr.cs.tu-bs.de/~harbaum/pilot
+
+This program is freeware/open source. Please read the file COPYING that
+came with this archive.
+
+- What's new in version 1.3?
+Version 1.3 can be configured to adjust the refresh rate in black'n white
+mode only (best for most greyscale games, but needs contrast adjustment when
+starting these games) or to affect the greyscale modes as well (some 
+shades of grey 'flicker', but no contrast adjustment needed for greyscale 
+programs like avantgo).
+
+- What's new in version 1.2?
+You can now configure the refresh rate in hackmaster. The default value
+for an activated NoStreak is 2. But once the hack is activated you can 
+change the value in the config form (the refresh rate decreases with 
+higher values, with a value of 5 the refresh is that low, that the 
+flickering starts to get annoying, 0 is the original system value
+which is also used without nostreak installed).
+
+The config form does not affect the screen while NoStreak is disabled.
+If you change the value and then disable NoStreak, the changed value 
+is still used, but may be changed by the system after some time.
+
+Also after a reset the refresh is set to the default refresh value (which 
+is 2).
+
+- What's new in version 1.1?
+Greyscale did not really work with version 1.0.
+
+- What is NoStreak?
+Some Palm IIIx displays have the 'streaking' problem. They tend to extend
+vertical lines (can be seen in the datebook month view) . Sometimes this 
+can be adjusted by reducing the contrast using the contrast adjustment wheel.
+
+This problem can sometimes be solved with software by changing the display
+refresh frequency. This is what this program does.
+
+- Installation
+NoStreak is a hackmaster extension and needs hackmaster to run. Once hackmaster
+and NoStreak are installed, you can enable NoStreak in the hackmaster 
+application.
+
+- What about other Palms?
+This program was written for the Palm IIIx. Please don't use it on other
+machines.
+
+- Speed increase
+There is a small system speed increase with this hack. This is due to reduced 
+memory bandwidth used by the video controller because of the reduced screen 
+refresh rate. Therefore, more bandwidth remains for use by the system CPU 
+causing the pilot to run slightly faster.

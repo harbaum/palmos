@@ -1,0 +1,67 @@
+TRAP ID 1000 0xa33e
+TRAP ID 1001 0xa33e
+
+ALERT ID 3100
+ERROR
+BEGIN
+  TITLE "Gray Hack"
+  MESSAGE "This machine is not compatible with this hack."
+
+  BUTTONS "Ok"
+END
+
+FORM ID 3000 AT (2 2 156 156) Modal
+HELPID 3200
+BEGIN
+    TITLE "Gray Hack 1.0"
+
+    LABEL "(c) 2000 by Till Harbaum" AUTOID AT (CENTER 20)
+    LABEL "http://bodotill.suburbia.com.au" AUTOID AT (CENTER PREVBOTTOM)
+
+    LABEL "This software comes with" AUTOID AT (CENTER PREVBOTTOM+5)
+    LABEL "no warranty. It is published" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "under the GNU public" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "license. See www.fsf.org for" AUTOID AT (CENTER PREVBOTTOM)
+    LABEL "details." AUTOID AT (CENTER PREVBOTTOM)
+
+    BUTTON "OK" ID 5001 AT (CENTER 140 50 10) FRAME
+END
+
+APPLICATIONICONNAME ID 3000 "GrayHack"
+
+Form id 2000 at (2 72 156 86) Modal
+HELPID 3200
+BEGIN
+    TITLE "Gray Hack Configuration"
+
+    FORMBITMAP AT ( 10 30) BITMAP 5010
+    FORMBITMAP AT ( 45 30) BITMAP 5011
+    FORMBITMAP AT ( 80 30) BITMAP 5012
+    FORMBITMAP AT (115 30) BITMAP 5013
+
+    REPEATBUTTON "\001" ID 5020   AT (45+10 20 13 8) FONT 5 NOFRAME
+    REPEATBUTTON "\002" ID 5021   AT (45+10 49 13 8) FONT 5 NOFRAME
+
+    REPEATBUTTON "\001" ID 5030   AT (80+10 20 13 8) FONT 5 NOFRAME
+    REPEATBUTTON "\002" ID 5031   AT (80+10 49 13 8) FONT 5 NOFRAME
+
+    BUTTON "OK" ID 5001 AT (115 68 30 AUTO) FRAME
+END
+
+STRING 3200 "This hack allows to configure the grayscale settings "\
+	"for 100% PalmOS compliant applications using the 2 bpp "\
+	"(black, white and two shades of gray) grayscale modes. "\
+	"This hack does not affect/work with applications that "\
+	"access the video hardware directly and bypass or overwrite "\
+	"the grayscale settings set by the operating system.\n\n"\
+	"This hack was developed for use with PalmBoy version 3.2 "\
+	"and later (see http://palmboy.suburbia.com.au)"
+
+BITMAPGREY  5010 "col0.bmp"
+BITMAPGREY  5011 "col1.bmp"
+BITMAPGREY  5012 "col2.bmp"
+BITMAPGREY  5013 "col3.bmp"
+
+VERSION "1.0"
+
+

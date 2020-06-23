@@ -1,0 +1,43 @@
+TRAP ID 1000 0xa218
+TRAP ID 1001 0xa219
+TRAP ID 1002 0xa11d
+TRAP ID 1003 0xa213
+
+Form id 2000 at (2 72 156 86)
+Modal
+Begin
+  Title "Battery Meter Hack"
+  Label "Battery  Info:" id 2001 at (12 48) Font 1
+  Label "Battery Type:" id 2002 at (12 33) Font 1
+  Checkbox "Shade Battery Symbol" id 2003 at (10 18 AUTO AUTO) RightAnchor Font 1
+  List "Alkaline" "NiMH/NiCd" "Lithium" id 2004 at (88 33 50 33) NonUsable Disabled Font 0
+  PopupTrigger "" id 2005 at (84 33 20 12) LeftAnchor Font 0
+  PopupList id 2005 2004
+  List "Percentage" "Voltage" id 2006 at (88 48 50 22) NonUsable Disabled Font 0
+  PopupTrigger "" id 2007 at (84 48 20 12) LeftAnchor Font 0
+  PopupList id 2007 2006
+
+  Button "OK" id 3001 at (13 67 37 12) RightAnchor Font 0
+  Button "Cancel" id 3002 at (60 67 37 12) RightAnchor Font 0
+End
+
+Form id 3000 at (2 2 156 156)
+Modal
+Begin
+  Title "Battery Meter Hack"
+  Button "OK" id 3001 at (62 139 37 12) RightAnchor
+
+  FormBitmap at (12 40) Bitmap 3000
+  Label "Battery Meter" id 3002 at (55 30) Font 2
+  Label "OS 3.0/3.1" id 3004 at (55 45) Font 2
+  Label "Version 1.2" id 3004 at (55 60) Font 2
+  Label "Copyright \251 1998 Till Harbaum" id 3005 at (CENTER 90)
+  Label "http://www.ibr.cs.tu-bs.de/" id 3006 at (CENTER PREVBOTTOM)
+  Label "~harbaum/pilot" id 3007 at (CENTER PREVBOTTOM)
+End
+
+Bitmap id 3000 "battery.pbm"
+
+Version id 1 "1.1"
+ApplicationIconName id 3000 "Battery Meter Hack"
+
