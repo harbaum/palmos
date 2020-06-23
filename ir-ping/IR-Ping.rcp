@@ -1,0 +1,25 @@
+//
+// IR-Pong.rcp : Resource file for the IR-Pong application.
+//
+
+#include "IR-PingRsc.h"
+
+FORM ID frm_Main at ( 0 0 160 160 ) USABLE
+BEGIN
+     TITLE "IR Ping"
+
+     POPUPTRIGGER "Command" ID CmdPopup AT (5 146 AUTO AUTO) LEFTANCHOR
+     LIST "Discover" "Connect IrLap" "Discon IrLap" "Connect TP" "Connect IrLMP" "TestReq" "SendReq" "RxSize" "TxSize" "DeviceName" ID CmdList AT (PrevLeft PrevTop 70 1) NONUSABLE VISIBLEITEMS 10
+     POPUPLIST CmdPopup CmdList     
+
+     REPEATBUTTON "\001" ID ScrollUp AT   (146 144 13 8) NOFRAME FONT 5
+     REPEATBUTTON "\002" ID ScrollDown AT (146 152 13 8) NOFRAME FONT 5
+END
+
+ICON "IR-Ping.pbm"
+APPLICATION ID 1 "IRAn"
+VERSION ID 1 "0.1"
+
+
+
+

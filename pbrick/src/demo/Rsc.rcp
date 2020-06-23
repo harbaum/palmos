@@ -1,0 +1,71 @@
+//
+//   Rsc.rcp : Resource file for the PBrickDemo application.
+//
+//   Part of the PBrick Library, a PalmOS shared library for bidirectional
+//   infrared communication between a PalmOS device and the Lego Mindstorms
+//   RCX controller.
+//
+//   Copyright (C) 2002 Till Harbaum <t.harbaum@web.de>
+//
+//   This program is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//   (at your option) any later version.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the Free Software
+//   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#include "Rsc.h"
+
+FORM ID frm_Main at ( 2 2 156 156 ) USABLE MODAL
+MENUID mnu_Main
+BEGIN
+   TITLE "PBrick Demo V1.0"
+   FIELD ID Field AT (4 15 144 121) UNDERLINED MULTIPLELINES MAXCHARS 4096   
+   SCROLLBAR ID Scrollbar AT (148 15 7 121)
+
+   BUTTON "S0" ID btn_Snd0 AT (4 160-20 20 11 ) USABLE
+   BUTTON "S1" ID btn_Snd1 AT (PREVRIGHT+4 PREVTOP 20 11 ) USABLE
+   BUTTON "S2" ID btn_Snd2 AT (PREVRIGHT+4 PREVTOP 20 11 ) USABLE
+   BUTTON "FW" ID btn_Firm AT (PREVRIGHT+4 PREVTOP 20 11 ) USABLE
+   BUTTON "BT" ID btn_Bat  AT (PREVRIGHT+4 PREVTOP 20 11 ) USABLE
+END
+
+MENU ID mnu_Main
+BEGIN
+        PULLDOWN "PBrick Demo"
+        BEGIN
+                MENUITEM "About..." ID mit_About "A"
+        END
+END
+
+ALERT ID alt_About
+INFORMATION
+BEGIN
+        TITLE "About PBrick Demo"
+        MESSAGE "PBrick Demo v1.0\nCopyright (c) 2002\nby Till Harbaum\nt.harbaum@web.de"
+        BUTTONS "OK"
+END
+
+ALERT ID alt_err
+ERROR
+BEGIN
+        TITLE "Error"
+        MESSAGE "^1"
+        BUTTONS "OK"
+END
+
+ICONFAMILY "icons/icon.1.bmp" "icons/icon.2.bmp" "icons/icon.4.bmp" "icons/icon.8.bmp"
+SMALLICONFAMILY "icons/icon_sm.1.bmp" "icons/icon_sm.2.bmp" "icons/icon_sm.4.bmp" "icons/icon_sm.8.bmp"
+
+APPLICATION ID 1 "PBDm"
+VERSION ID 1 "1.0"
+
+

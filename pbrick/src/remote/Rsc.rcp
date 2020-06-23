@@ -1,0 +1,90 @@
+//
+//   Rsc.rcp : Resource file for the PBrickRemote application.
+//
+//   Part of the PBrick Library, a PalmOS shared library for bidirectional
+//   infrared communication between a PalmOS device and the Lego Mindstorms
+//   RCX controller.
+//
+//   Copyright (C) 2002 Till Harbaum <t.harbaum@web.de>
+//
+//   This program is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//   (at your option) any later version.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the Free Software
+//   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#include "Rsc.h"
+
+//   BUTTON "\001" ID btn_a_fwd AT (147 144 12 8) USABLE FONT 5 
+
+FORM ID frm_Main at ( 2 2 156 156 ) USABLE MODAL
+MENUID mnu_Main
+BEGIN
+   TITLE "PBrick Remote V1.0"
+
+   BUTTON "MSG1" ID btn_msg1  AT (  6  20 30 13 ) USABLE
+   BUTTON "MSG2" ID btn_msg2  AT ( 43  20 30 13 ) USABLE
+   BUTTON "MSG3" ID btn_msg3  AT ( 80  20 30 13 ) USABLE
+
+   BUTTON "PRG1" ID btn_prg1  AT (120  20 30 20 ) USABLE
+   BUTTON "PRG2" ID btn_prg2  AT (120  47 30 20 ) USABLE
+   BUTTON "PRG3" ID btn_prg3  AT (120  74 30 20 ) USABLE
+   BUTTON "PRG4" ID btn_prg4  AT (120 101 30 20 ) USABLE
+   BUTTON "PRG5" ID btn_prg5  AT (120 128 30 20 ) USABLE
+	
+   BUTTON "\001" ID btn_a_fwd AT (  6  44 30 30 ) USABLE FONT 5 
+   LABEL "A"     AUTOID       AT ( CENTER@22 CENTER@86)  FONT 7
+   BUTTON "\002" ID btn_a_rev AT (  6  96 30 30 ) USABLE FONT 5 
+
+   BUTTON "\001" ID btn_b_fwd AT ( 43  44 30 30 ) USABLE FONT 5 
+   LABEL "B"     AUTOID       AT ( CENTER@59 CENTER@86)  FONT 7
+   BUTTON "\002" ID btn_b_rev AT ( 43  96 30 30 ) USABLE FONT 5 
+
+   BUTTON "\001" ID btn_c_fwd AT ( 80  44 30 30 ) USABLE FONT 5 
+   LABEL "C"     AUTOID       AT ( CENTER@96 CENTER@86)  FONT 7
+   BUTTON "\002" ID btn_c_rev AT ( 80  96 30 30 ) USABLE FONT 5 
+
+   BUTTON "Stop" ID btn_stop  AT (  6 136 49 13 ) USABLE
+   BUTTON "Beep" ID btn_beep  AT ( 61 136 49 13 ) USABLE
+END
+
+MENU ID mnu_Main
+BEGIN
+        PULLDOWN "PBrick Remote"
+        BEGIN
+                MENUITEM "About..." ID mit_About "A"
+        END
+END
+
+ALERT ID alt_About
+INFORMATION
+BEGIN
+        TITLE "About PBrick Remote"
+        MESSAGE "PBrick Remote v1.0\nCopyright (c) 2002\nby Till Harbaum\nt.harbaum@web.de"
+        BUTTONS "OK"
+END
+
+ALERT ID alt_err
+ERROR
+BEGIN
+        TITLE "Error"
+        MESSAGE "^1"
+        BUTTONS "OK"
+END
+
+ICONFAMILY "icons/icon.1.bmp" "icons/icon.2.bmp" "icons/icon.4.bmp" "icons/icon.8.bmp"
+SMALLICONFAMILY "icons/icon_sm.1.bmp" "icons/icon_sm.2.bmp" "icons/icon_sm.4.bmp" "icons/icon_sm.8.bmp"
+
+APPLICATION ID 1 "PBRm"
+VERSION ID 1 "1.0"
+
+
