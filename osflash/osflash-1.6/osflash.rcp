@@ -1,0 +1,55 @@
+//
+// osflash.rcp : Resource file for the osflash application.
+//
+
+#include "osflashRsc.h"
+
+FORM ID frm_Main at ( 2 2 156 156 ) USABLE MODAL
+HELPID help
+BEGIN
+     TITLE "OS Flash V1.6"
+
+     LABEL "You are about to re-flash" AUTOID AT (5 15) FONT 1
+     LABEL "your operating system!" AUTOID AT (PREVLEFT PREVBOTTOM) FONT 1
+     LABEL "This is extremely dangerous!" AUTOID AT (PREVLEFT PREVBOTTOM+5) FONT 1
+     LABEL "Please exit now if you don't" AUTOID AT (PREVLEFT PREVBOTTOM+5) FONT 1
+     LABEL "want to risk the life of" AUTOID AT (PREVLEFT PREVBOTTOM) FONT 1
+     LABEL "your pilot!" AUTOID AT (PREVLEFT PREVBOTTOM) FONT 1
+
+     BUTTON "Flash OS now!"  ID ButFlash    AT (CENTER 140 70 AUTO)
+END
+
+STRING help "This program re-flashes the flash ROM.\n\n"\
+ "This is a quite dangerous operation, since reflashing the "\
+ "PalmOS includes temporary erasure of the PalmOS and a "\
+ "PalmPilot without or with damaged PalmOS will not do "\
+ "anything. It will not even boot anymore and can't be restored.\n"\
+ "Other things you should really take care of are:\n"\
+ "- Never re-flash with low batteries\n"\
+ "- Never remove batteries during re-flash\n"\
+ "- Never flash-in a japanese OS (it is too big)\n"\
+ "- Never flash-in a OS modified by flashbuilder"
+
+ALERT ID alt_Flash
+CONFIRMATION
+BEGIN
+  TITLE "Re-flash OS"
+  MESSAGE "Do you really want to reflash your OS? Doing so may kill your pilot!"
+
+  BUTTONS "No" "Yes"
+END
+
+
+ALERT ID alt_err
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "^1"
+
+  BUTTONS "OK"
+END
+
+ICON "osflash.pbm"
+APPLICATION ID 1 "OSFl"
+VERSION ID 1 "1.6"
+

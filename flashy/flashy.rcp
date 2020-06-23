@@ -1,0 +1,31 @@
+//
+// flashy.rcp : Resource file for the flashy application.
+//
+
+#include "flashyRsc.h"
+
+FORM ID frm_Main at ( 2 2 156 156 ) USABLE MODAL
+HELPID 1001
+BEGIN
+     TITLE "Flashy - 27.4.1999"
+
+     BUTTON "Info"   ID ButInfo   AT (4 142 AUTO AUTO)
+     BUTTON "Read"   ID ButRead   AT (PREVRIGHT+5 PREVTOP AUTO AUTO)
+     BUTTON "Write"  ID ButWrite  AT (PREVRIGHT+5 PREVTOP AUTO AUTO)
+     BUTTON "Erase"  ID ButErase  AT (PREVRIGHT+5 PREVTOP AUTO AUTO)
+END
+
+STRING ID 1001 "This is a flash demo program\n"\
+        "by Till Harbaum\n"\
+        "(t.harbaum@tu-bs.de)\n\n"\
+	"This program shows how to access the extended capabilities "\
+	"of the Flash ROM included in the Palm III\n\n"\
+	"USE AT YOUR OWN RISK!"
+
+ICON "flashy.pbm"
+APPLICATION ID 1 "Flsh"
+VERSION ID 1 "1.1"
+
+
+
+

@@ -1,0 +1,121 @@
+OS Flash for Palm III, IIIx and V
+
+OS Flash V1.5
+This program allows to re-flash the OS in the flash rom of a Palm device.  
+It can be used to change the language of a PalmOS 3.0/3.1/3.3/3.5 in a 
+Palm III/IIIx and V.  This program may destroy your pilot beyond repair!  
+
+To work with osflash you need the follwing things:
+
+- A Palm III/IIIx/V with Am29LV160BB or Fujitsu MBM29LV160B or Toshiba
+  TC58FVB160 flash rom. Osflash will complain if there is no such flash rom.
+- The image of an PalmOS 3.0/3.1/3.3/3.5 (no debug version, no image smaller
+  2097152 Bytes from 3coms web site, no image that was modified by FlashPro)
+- Lots of courage, since this can easily destroy your pilot.
+
+Instructions
+
+Step 1: Read all the instructions and all the questions and answers before 
+proceeding!  
+
+Step 2: Get an PalmOS rom image
+Known to work are the american, the german and the french OS 3.0, and the 
+french and american 3.1.  Most OS 3.x that use at most 1.625 MBytes 
+(1703936 bytes) flash space will work.  Japanese roms won't work, they are 
+too long!  
+
+To read the flash rom from a pilot you need a program like pi-getrom from 
+thepilot-link utilities.  The current version available for unix is 
+Pilot-link.0.9.0 
+(ftp://ftp.mayn.de/pub/pilot/Devel/Unix/pilot-link.0.9.0.tar.gz) which 
+works fine with OS 3.0.  For DOS/Win there is version 0.8.6 
+(http://www.palmcentral.com/local/pilot-link-w32.zip) available, which is 
+quite old.  Also available for windows is the getrom2 package, available 
+at www.ibr.cs.tu-bs.de/~harbaum/pilot/osflash/getrom2M.zip.  Please don't 
+ask me for other programs, this is all i know and i am using the unix 
+version 0.9.0.  
+
+Don't use a pilot ROM image that has been modified by flashbuilder or 
+FlashPro!  
+
+Step 3: Convert the rom image into a PalmOS database
+Rename the rom image (which must be exactly 2097152 Bytes long) into 
+something like rom3x.img and install either the DOS/Win executable of 
+os2pdb from the binary distribution or compile it yourself (for Linux for 
+example) from the source distribution.  Now type 'os2pdb rom3x.img'.  This 
+will write a 'rom3x.pdb' (which must be exactly 1704430 bytes long with 
+osflash version 1.5).  
+
+Osflash will tell you a checksum, please write it down somewhere.
+
+Step 4: Install osflash on pilot to be flashed
+HotSync the rom3x.pdb and osflash.prc onto the empty Palm III you want to 
+reflash.  Make sure there is nothing else installed on the pilot and that 
+the batteries are fresh!  
+
+Step 5: Flash the OS
+To flash the OS just start 'OS Flash' on the pilot.  After some seconds 
+you will be shown two checksums.  Make sure that the database checksum is 
+the same as in step 3.  If it isn't exit immediately and HotSync again.  
+Never flash with the wrong checksum.  
+
+If you click the 'flash now'-button, you will be prompted once more if you 
+really want to risk this.  This is the last time you can change your mind!  
+
+If you proceed the pilot will switch into some ugly text mode, since the 
+old OS is switched off during flash operation.  You'll see a progress bar 
+drawn of stars appear on the screen.  After displaying 32 stars the 
+flashing is complete and you'll be asked to reset the pilot.  
+
+If there are other characters during flash than stars, there are errors 
+during flash operation.  Your pilot will most likely be dead if this was 
+the case.  Please don't press reset now, but write down the exact sequence 
+of stars, numbers and characters you see in the progress bar, this might 
+help me to find the problem (although this will never help you with you 
+dead pilot).  
+
+During flash operation, the old serial number of the old OS will stay.  
+The serial number is in a protected area of the flash and cannot be erased 
+or re-flashed.  
+
+Step 6: Restart the new OS
+After an hard reset you'll hopefully see the new OS booting.  But all ram 
+setting are still from the old OS (for example cathegory, time and date 
+settings are all still in the old language).  You should do a hard reset 
+with the power on button pressed during reset.  PalmOS will ask you if you 
+really want to rease all data.  Answer with yes and see a complete new OS 
+booting ...  
+
+We are finished
+
+Questions and Answers
+Can i use this program to flash linux?
+No, there is a protected sector in the flash rom that contains the serial 
+number.  Unless someone patches linux not to use this sector it will not 
+work.  
+
+Osflash malfunctioned and my pilot is dead, can i/you repair it?
+No.  I am sorry to say, but you can't repair it without using some special 
+adaptor (which i havn't and i don't know of anybody who has) or some 
+special flash programmer hardware (which has the same problem as above).  
+
+Does osflash work with a Palm IIIx or Palm V and OS 3.1?
+Yes, this was tested with the french OS 3.1 and a Palm IIIx.  The Palm V 
+isn't tested yet but should work.  
+
+Can i use osflash to put an OS 3.1 onto my old Palm III with OS 3.0
+Very unlikely.  I haven't tried this, but i doubt that OS 3.1 will work on 
+old pilots.  You might give it a try, but don't complain if your Pilot 
+dies!  
+
+Till Harbaum (t.harbaum@tu-bs.de)
+http://www.ibr.cs.tu-bs.de/~harbaum/pilot/osflash.html
+
+
+
+Version 1.5 September 24, 2000 (Tim Charron tcharron@interlog.com) 
+- Added Hard-reset software routine
+- Added support for some Toshiba chips
+- Prevented writing of small rom area (first 32k)
+- Increased size of allowable ROM images to 52 blocks
+

@@ -1,0 +1,115 @@
+flash_io - (c) 1999 Till Harbaum
+t.harbaum@tu-bs.de
+
+Version 1.1.99 - initial release (info only)
+        2.1.99 - write/erase implemented
+        3.1.99 - clearcheck, verify and more security
+
+This archive conatins sample routines for access to the 
+built-in flash rom of the 3Com Palm III. I take no 
+responsibility for anything that might happen when
+using the program/the code segments.
+
+The demo program has four buttons:
+Info -  shows some internal information obtained
+        from the flash rom and in the last line 
+        the last used flash rom address. If you
+        have never written to the flash rom 
+        contents before, this value should
+        show max $9ffff. If this value is 
+        bigger than $f0000 you should not use
+        the write/erase capabilities of the
+        demo program, since there is something
+        stored in your rom (by flashbuilder
+        for example) that should not be touched.
+        Of course if you used the write command,
+        this value shows $f0003.
+Read -  Reads and displays the first 8 words of
+        the flash rom contents at word offset 
+        f0000.
+Write - Writes four words ($1234, $5678, $aaaa
+        and $5555) to word offset $f0000 into
+        your P3s flash rom. Don't use this
+        function if you are afraid of killing
+        your P3. Also use this function with a 
+        TRG board at your own risk. There are lots
+        of security checks built into this
+        program, but i haven't tried this with
+        a TRG board.
+Erase - Erases the 64k bytes segment beginning
+        at word offset $f0000. Warnings: Same
+        as for the write button.
+
+The archive should contain the following files:
+readme      - this text
+flashy.prc  - the executable demo application
+flashy.c    - gui routines for demo app (gcc)
+flashy.rcp  - gui for demo app (pilrc)
+flashyRsc.h - gui definitions for demo app
+flash_io.c  - flash io functions
+flash_io.h  - prototypes for flash io functions
+Makefile    - allow make to build everything above
+
+All flash functions are in flash_io.c (with prototypes
+in flash_io.h). The functions are:
+
+extern int  flash_is_present(void);
+  Checks whether the right flash rom (AM29LV160BB) is present.
+
+extern void flash_get_info(char *buffer);
+  Expects a pointer to a 256 char array. Fills this array
+  with internal configuration data from the flash rom.
+
+extern long flash_last_word_used(void);
+  Determines the last word in the flash, that contents some
+  else than 0xffff. Use this function to your unmodified 
+  flash rom to see where your OS ends.
+
+extern int  flash_is_empty(long start, long size);
+  Checks if the specified area in the flash rom is empty.
+  The start address is given as the word offset inside
+  the flash rom. E.g. ROM word offset 0xa0000 is accessed
+  by the pilot at address $10d40000 (rom base $10c00000 +
+  2 * word offset).  
+
+extern int  flash_erase_sector(long start);
+  This function erases the sector at word offset start. The
+  whole sector (64kBytes) containing the given address is 
+  erased. Erasure of single bytes is not possible! This
+  function only allows to erase data in the range of $a0000 to
+  $fffff, since this area is not used by the OS. This function
+  returns 0 on success.
+
+extern long flash_write(unsigned short *src, long dest, long size);
+  This function writes size _words_ addressed via src into the
+  flash at word offset dest. This function only allows to write data 
+  in the range of $a0000 to $fffff, since this area is not used by 
+  the OS. This function returns 0 on success, offset of word
+  which caused an error otherwise.
+
+extern int  flash_read(unsigned short *dest, long src, long size);
+  This function fills the word array indicated by dest with 
+  size words from flash word offset src.
+
+extern int  flash_verify(unsigned short *src, long dest, long size);
+  This function verifys if the flash rom contains at word offset
+  dest the same size word as stored at address src.
+
+
+Oh, yes, i forgot: This code is sandware. This is if you like the
+functions or want to use them (and live outside germany) i ask you to
+send some sand (like a pocket full) from your country to my sand
+collecting girl friend at:
+
+  Almut Behrens
+  Marienstrasse 22a
+  38104 Braunschweig
+  Germany 
+
+Thanx!
+
+Have fun with this
+  Till
+
+
+
