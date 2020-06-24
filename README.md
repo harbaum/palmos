@@ -13,7 +13,7 @@ request. Also if you find files which you think shouldn't be there
 please also drop me a note or submit a pull request.
 
 The exception from this rule is Elite which was originally written by
-Chrstian Pinder. Please refer to his site at http://www.new-kind.com/
+Christian Pinder. Please refer to his site at http://www.new-kind.com/
 for details about the license of that code.
 
 This is here for those who still care for these devices.
