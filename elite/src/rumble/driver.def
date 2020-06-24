@@ -1,0 +1,7 @@
+syslib { "Rumble Lib" RLib }
+
+/* This app has three code resources: code #1 with all unannotated
+   functions, #2 with functions placed in the "editfns" section,
+   and #3 with "viewfns" functions.  */
+
+/* multiple code { editfns } */

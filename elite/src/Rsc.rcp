@@ -1,0 +1,21 @@
+//
+// Rsc.rcp : Resource file for the Elite application.
+//
+
+#include "Rsc.h"
+
+ALERT ID alt_err
+ERROR
+BEGIN
+        TITLE "Elite for Palm OS - Error"
+        MESSAGE "^1"
+        BUTTONS "Ok"
+END
+
+ICONFAMILY "graphics/icon.1.bmp" "graphics/icon.2.bmp" "graphics/icon.4.bmp" "graphics/icon.8.bmp"
+SMALLICONFAMILY "graphics/icon_sm.1.bmp" "graphics/icon_sm.2.bmp" "graphics/icon_sm.4.bmp" "graphics/icon_sm.8.bmp"
+
+APPLICATION ID 1 "Elit"
+
+
+

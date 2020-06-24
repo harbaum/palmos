@@ -1,0 +1,20 @@
+Version 0.8
+  - first released version
+
+Version 0.9
+  - no shuttles are launched while player is in docking position
+  - missiles are launched instead of vipers while player is
+    in docking position
+  - removed "hoopy casinos" option
+  - added "inverse grayscale" option
+  - fixed bug with damage display
+  - no damage display for missiles
+  - fixed error in game timer
+
+Version 0.9.1
+  - use of offscreen palmos bitmaps on incompatible video hardware
+  - option to use extended m550 buttons
+
+Version 0.9.2
+  - local jump is a button activated once to avoid the need of 
+    continous screen taps

@@ -1,0 +1,34 @@
+obvious errors in newkind code:
+
+- The flags of a newly created planet/sun are taken from
+  undefined memory. The results are unpredictable (ever
+  seen an angry planet?). 
+
+- intro1 places a NULL ship with negative direction at init
+  which is immediately removed.
+
+- tidy_matrix relies on some vector elements never 
+  becoming 0 since it's dividing by them without prior
+  testing which may result in a division by zero
+
+- distance calculation for objects has a integer overflow
+  (e.g. distance of planet/sun/station is nonsense)
+
+- placement of station relies on wierd station distance (station is
+  placed at offset 65792 and is removed if > 57344)
+
+- in auto dock, ship.flags is not initialized
+
+- init matrix is wrong "handed" and is corrected by tidy matrix.
+
+- cobra_lone is also used as a pack hunter (due to sidewinder+7), 
+  moray is never created, since it's not in reach of cobra_lone+3
+
+- ship structures size does not match graphical size -> targetting ships
+  station etc is not consistant
+
+- explosion delta is never initialized
+
+- missile target is not lost when entering hyperspace
+
+- ships launch at 90 wrong z angle from station

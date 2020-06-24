@@ -1,0 +1,510 @@
+<html>
+<head><title>Elite for Palm&nbsp;OS - Manual</title></head>
+<body>
+
+<center>
+<h1>Elite for Palm&nbsp;OS - Manual</h1>
+<font face="verdana, arial, helvetica, geneva">
+Palm&nbsp;OS version (c) 2002 by Till Harbaum<br>
+Elite - The New Kind (c) 1999-2001 by C.J. Pinder<br>
+Original Game (c) 1984 by Ian Bell and David Braben
+</font>
+</center>
+
+<font face="verdana, arial, helvetica, geneva">
+<h2>History</h2>
+
+This Palm&nbsp;OS port was written by me (Till Harbaum). Some of the code
+of this game is based on 
+<a href="http://www.cjpinder.clara.co.uk/elite.html">Elite - The New
+Kind</a> by Christian Pinder.  Some of the Newkind code is based
+on an Acorn BBC Elite written by Ian Bell and David Braben.<p>
+</font>
+
+<font face="verdana, arial, helvetica, geneva">
+<h2>System requirements</h2>
+</font>
+
+<table border="0" cellpadding="0" cellspacing="0"><tr><td>
+<table align="left"><tr><td>
+<img src="title.gif">
+</td><td>&nbsp;</td></tr></table>
+
+<font face="verdana, arial, helvetica, geneva">
+
+<dl>
+<dt><b>Operating System:</b></dt><dd>
+
+Elite for Palm&nbsp;OS requires at least Palm&nbsp;OS 3.3. Later
+versions of Palm&nbsp;OS e.g. lack the required support for grayscale
+video.</dd><p>
+
+<dt><b>Video:</b></dt><dd>
+
+Elite for Palm&nbsp;OS requires a Palm&nbsp;OS compatible handheld
+device with a video unit capable of doing a 160x160 color video mode
+with 8 bit display depth or grayscale video with 4 bit display
+depth.<p>
+
+Currently, all existing color devices and most of the grayscale 
+devices are supported. All Palms later than the first Palm III
+model support grayscale video with 4 bit display depth (16 shades
+of gray).<p>
+
+The game works on machines with Hires video like the newer Sony Clies,
+but it does not make use of the increased resolution. Instead it
+temporarily switches these such machines into a 160x160 compatibility
+mode and restores the Hires video mode after the game has been
+stopped. On some models it may be necessary to enable Hires support in
+the operating system for the game. Some devices have a Hires panel in
+the preferences application that can be used to make Elite for
+Palm&nbsp;OS to run on certain Hires machines.
+</dd>
+
+<dt><b>Sound:</b></dt><dd>
+
+Elite for Palm&nbsp;OS make use of multi channel midi playback for the
+intro screen. This is currently only supported on the Sony Clie
+series. Genuine Palms will only play one single sound channel which
+greatly decreases playback quality.</dd>
+
+</dl>
+
+</font>
+</td></tr></table>
+
+<font face="verdana, arial, helvetica, geneva">
+<h2>Installation</h2>
+
+The game comes in one single file named
+<tt><b>Elite.prc</b></tt>. Please install this file onto your Palm&nbsp;OS
+machine as usual. Start the game by tapping the Elite icon.<p>
+
+If you own a Palm M505 or M515 you might install
+<tt><b>RumbleLibM50x.prc</b></tt> as well. This library provides some API
+to the rumble/vibration alarm unit inside these machines and will
+allow you to experience some kind of force feedback during the game.
+Please read the <tt><b>readme.txt</b></tt> of the rumble lib for more
+details on this.<p>
+</font>
+
+<font face="verdana, arial, helvetica, geneva">
+<h2>The game</h2>
+
+See the <a href="manual.htm"> Elite Space Traders Flight Manual</a>
+for details about the gameplay. A <a href="manual.pdf">PDF version of
+the Flight Manual</a> is available as well. This document only convers
+the specifics of Elite for Palm&nbsp;OS.
+
+<h3>Game controls</h3>
+
+Elite for Palm&nbsp;OS makes use of many input methods available on 
+Palm devices:
+
+<h4>Touch Screen</h4>
+
+The touch screen is used for most controls while docked. It is
+e.g. used to equip the ship, to control the trading system and to use
+the navigation controls. See the section <a href=#onscreen>
+on-screen controls</a> for details.
+
+<h4>Hard Keys</h4> 
+
+The hard keys below the palm screen are used for in-flight
+control. They are used to roll the ship right or left, to climb and
+dive, to increase and decrease the ship speed and to fire the lasers
+or launch missiles.<p>
+
+The Hard Keys can be configured for right and left handed layout:
+<center><img src="hard-keys.gif"></center>
+
+<h4>Silkpad and graffity area</h4>
+
+These can be used as an alternate input during flight. Its setup
+changes together with the Hard Keys according to right or left handed
+layout.  In right handed mode, direction input is mapped to the text
+input area and fire/speed is mapped to the number input area. In left
+handed mode, both areas are exchanged, but the sizes remain the same:
+<p>
+
+<table border="0" width="100%">
+<tr><td align=center><img src="graffiti_right.gif"></td>
+    <td align=center><img src="graffiti_left.gif"></td></tr>
+<tr><td align=center>Right handed layout</td>
+    <td align=center>Left handed layout</td></tr>
+</table></dd><p>
+
+By using the <a href="../silkjoy">Silkscreen joystick panel</a> the
+direction input can be reconfigured to match the needs of special
+input devices attached to the graffiti area.<p>
+
+<h4>The PalmGamePad</h4>
+
+The <a href="http://www.palmgamepad.com">PalmGamePad</a> is an
+external device that is attached to the palms hotsync port and which
+provides additional direction and function keys especially suited for
+gaming. Since the layout of this device is fixed, the function mapping
+is not affected by the left/right handed setting:<p>
+
+<center><img src="gamepad.gif"></center>
+
+<h4>Sony Jog Dial</h4>
+
+The jog dial present on some Sony Clie devices can be used in flight
+mode to increase and decrease the ships speed.  Pushing the jog dial
+will arm/unarm the missiles. The back button toggles between 
+front and rear view during flight.
+
+<a name=onscreen><h3>On-screen controls</h3></a>
+
+The instruments for flight and combat control are placed beneath the 
+main screen:<p>
+
+<center><img src="scanner.gif"></center>
+
+The instruments in detail:
+
+<h4>Front/Rear Shields</h4>
+
+These indicators display the status of the front and rear
+shields. These shields protect the ship from damage due to laser fire,
+missiles, collisions with other ships and missaligned docking
+procedures.<p>
+
+If the shields are down, damage directly affects the enery.<p>
+
+Damaged shields are recharged from the energy banks.
+
+<h4>Fuel gauge</h4>
+
+The fuel gauge displays the remaing fuel for the hyperspace
+engines. The amount of remaining fuel limits the distance of a
+hyperspace jump. With maximum fuel, a distance of 7.0 light years can
+be traveled during a hyperspace jump.<p>
+
+Fuel is available in all space stations. If the ship is equipped with
+fuel scoops, fuel can be taken from solar radiation by flying at high
+speed as close to the sun as possible without damaging the ship (see
+<a href=#cabtemp>Cabin Temerature</a>).<p>
+
+No fuel is required for flying in intersolar distances and during
+inter-galactic hyperjumps.
+
+<a name=cabtemp><h4>Cabin Temperature</h4></a>
+
+The cabin temperature depends on the ships distance to the
+sun. If the temperature gets too high, the ship takes serious
+damage. Extremely caution is required while approaching the sun
+for <a href=#fuelscoops>fuel scooping</a>.
+
+<a name=lasertemp><h4>Laser Temperature</h4></a>
+
+The ships lasers are very powerful devices and require a seperate
+cooling system. If continuously fired, the cooling system will be
+unable to keep the laser temperature low. If the laser temperature
+exceeds the maximum value, the laser fire rate is reduced to prevent
+damage.<p>
+
+Since all lasers use the same cooling system, all lasers are affected
+simultanously.
+
+<h4>Altimeter</h4>
+
+The altimeter shows the distance to the planet. The Cobra MK3 is not
+suited for operation within a planets atmosphere and will be destroyed
+if the altitude falls below a certain value.
+
+<h4>Missiles</h4>
+
+This instrument shows the number and status of the installed missiles.
+Green indicates a installed missile, yellow indicates an armed missile
+and red and armed missile locked onto a target. Missiles can only be
+launched if their status indicator shows red.<p>
+
+Only one missile can be armed and locked onto a target at once.
+
+<a name=statusind><h4>Status Indicator</h4></a>
+
+This device indicates whether the ship is within the range of a
+space station (indicated by a green S) or if the E.C.M system
+hast been activated (indicated by a red E).
+
+<h4>Compass</h4>
+
+If the ship is not within the range of a space station (see 
+<a href=#statusind>status indicator</a>), this device
+shows the direction to the nearest planet. If the ship is 
+within the range of a space station, the compass shows the
+direction to this station.<p>
+
+A green (or light) light in the center of the compass indicates
+the station or planet being directly in front of the ship. A red (or
+dark) light indicates, that the station or planet is exactly behind
+the ship.
+
+<h4>Proximity Sensor</h4>
+
+This device shows the current system status. If the status is "clean",
+interspace jumping (using the jump icon <img src="but_jump.gif">) is
+possible.<p>
+
+<center>
+<table border="1">
+<tr><td>Color Display</td><td>Grayscale Display</td><td>Meaning</td></tr>
+<tr><td align=center>green</td><td align=center>black/none</td><td>clean (no object within radar range)</td></tr>
+<tr><td align=center>yellow</td><td align=center>dark</td><td>object within radar range</td></tr>
+<tr><td align=center>red</td><td align=center>light</td><td>object within radar range and energy low</td></tr>
+</table>
+</center>
+
+<h4>Radar scanner</h4>
+
+This is the primary instrument for combat. It shows the position and
+status of all objects within the range of this powerful device. Each
+object is represented by a marker. White markers indicate ordinary
+objects like trading ships or boulders and meteors. Hostile objects
+are displayed in yellow and blinking. Missiles use pink markers and
+police ships are blue. If these are hostile, they blink as well. Space
+stations are represented by green markers.<p>
+
+This powerful instrument allows the pilot to determine the position of
+a object in all three axes.
+
+<h4>Speed</h4>
+
+This indicator shows the speed of the ship. If the speed exceeds a
+certain value, the speed indicators color changes to red. The Cobra
+Mk3's main engines have been modified to be operated continously at
+maximum speed without taking damage.
+
+<h4>Roll/Dive/Climb</h4>
+
+These indicators show the current movement around the ships axes. The
+effect of the automatic daming system installed on the Cobra Mk3 can
+be seen at these instruments.
+
+<h4>Energy</h4>
+
+This device shows the ships main energy. This energy is requiered the
+E.C.M system and the shields. If the ship runs out of energy, the ship
+will be destroyed.<p>
+
+Energy is automatically refilled at a certain rate. The refill
+rate can be increased with an <a href=#extraenergy>additional 
+energy unit</a>.
+
+<h3>Buying and selling cargo</h3>
+
+</font>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td>
+<table align="left"><tr><td>
+<img src="scr_market.gif">
+</td><td>&nbsp;</td></tr></table>
+<font face="verdana, arial, helvetica, geneva">
+
+One of the ways of making money is by buying and selling cargo at the
+space stations and trade them between different stations. The prices
+and the sortment of items to trade differ from station to station and
+depend on the planets economy. Some items like Alien Items can only be
+sold on space stations and will never be available for purchase.<p>
+
+The maximum amount of cargo that can be carried on board the Cobra Mk3
+is 20 tons. This capacity can be increased to 35 tons with an <a
+href=#extracargo>additional cargo bay</a>. While most items are sold
+in quantities of tons and will fill up the cargo may very fast, some
+items like gem stones are sold in gramm or kilogramm units. These
+light items are not stored in the main cargo bay and can be traded
+in huge amounts.<p>
+
+Items are bought and sold in the market screen activated by the market
+icon <img src="but_market.gif">. Tap the green arrows to move cargo
+from the station stock to your ships cargo bay and the red arrows to
+return items from the ship to the station.
+
+</font>
+</td></tr></table>
+<font face="verdana, arial, helvetica, geneva">
+
+<h3>Equiping the ship</h3>
+
+</font>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td>
+<table align="left"><tr><td>
+<img src="scr_equip.gif">
+</td><td>&nbsp;</td></tr></table>
+<font face="verdana, arial, helvetica, geneva">
+
+The Cobra Mk3 is sold with few optional equipment installed. Each
+Cobra comes with a front pulse laser and three missiles installed. The
+Cobra can be equiped with additional weapons and other add-ons
+available on the space stations. The amount and type of additional
+equipment available on a space station depends on the technological
+level of the associated planet.<p>
+
+In order to purchase an additional item for your ship, select the
+equip icon <img src="but_equip.gif"> and tap the corresponding
+white entry in the equipment table. Entries displayed in red are still
+missing on your ship, but are still too expensive. Green items are
+already equipped.<p>
+
+The additional equipment items available are:
+
+<h4>Fuel</h4>
+
+Fuel does not really qualify for additional equipment. Fuel is
+required to operate the hyperspace engines and is available on every
+space station. The Cobra Mk3 can hold fuel for up to 7.0 light years.
+
+<h4>Missiles</h4>
+
+Your Cobra Mk3 comes equiped with three missiles. Each missile can
+only be used once. At most four missiles can be installed on your ship
+at once.<p>
+
+The use of missiles includes three steps:<p>
+
+First the missile has to be armed using the <img
+src="but_missile.gif"> icon (as an alternative, Sony Clie users may
+use the jog dial to arm a missile, PalmGamePad users may use the left
+fire button). The fact, that a missile is armed is indicated by a red
+target circle in the main 3d view.<p>
+
+An armed missile is locked onto the first target, that appears in the
+target circle. A armed or targeted missile can be disarmed at any
+point using the same techniques that were used for arming the
+missile.<p>
+
+A targetted missile is launched with the fire button. 
+
+<h4>Pulse Laser</h4>
+
+One of these very reliable devices is initially installed on the front
+mounting only. Additional lasers for rear and side mounting can be
+installed.<p>
+
+Pulse lasers are available on planets with tech. level 3 or above for
+400 Credits each.
+
+<h4>Beam Laser</h4>
+
+Beam lasers are more advanced and powerful (and expensive) devices
+than pulse lasers. Once you become experienced (and wealthy) enough,
+you can all four mountings on your ship with this fine piece of
+technology.<p>
+
+Beam lasers are available on planets with tech. level 4 or above for
+1000 Credits each.
+
+<h4>Military Laser</h4>
+
+Military lasers are the most sophisticated pieces of technology, you
+can equip your ship with. These are devices to spread fear over the
+galaxy.<p>
+
+Military lasers are available on planets with tech. level 10 or above for
+6000 Credits each.
+
+<h4>Mining Laser</h4>
+
+Mining lasers are special devices required for asteroid mining. Equip
+your ship with at least one mining laser and 
+<a href=#fuelscoops>fuel scoops</a> to fragment asteroids into small
+pieces which can then be taken into the cargo bay using the fuel
+scooping mechanism.<p>
+
+Mining lasers are available on planets with tech. level 10 or above for
+800 Credits each.
+
+<a name=extracargo><h4>Large cargo bay</h4></a>
+
+With the large cargo bay, your cargo space can be expanded from 20 tons
+to 35 tons.<p>
+
+The large cargo bay is available on all planets for 400 Credits.
+
+<a name=ecm><h4>ECM System</h4></a>
+
+The ECM System provides an efficient protection agains missile
+attacks. It uses an electromagnetic field to destroy incoming
+missiles. The ECM system is sourced from the main energy
+banks and it is activated with the <img src="but_ecm.gif"> icon.<p>
+
+The ECM System is available on planets with tech. level 2 or above for
+600 Credits each.
+
+<a name=fuelscoops><h4>Fuel Scoops</h4></a>
+
+Fuel scoops enable you to obtain hyperspace fuel from solar radiation
+by flying at high velocity as close to the sun as possible. In
+addition, fuel scoops may be used for asteroid mining or to move other
+objects like e.g. cargo casnisters from free space into the cargo
+bay.<p>
+
+Fuel Scoops are available on planets with tech. level 5 or above for
+525 Credits each.
+
+<a name=pilot><h4>Docking Computer</h4></a>
+
+The docking computer can be attached to the ship's flight control system
+and enable it to dock the ship automatically. The docking computer is
+activated using the <img src="but_pilot.gif"> icon.<p>
+
+Docking computers are available on planets with tech. level 9 or above for
+1500 Credits.
+
+<a name=escape><h4>Escape Capsule</h4></a>
+
+If equiped with a escape capsule, you can always abandon your ship
+using the <img src="but_bomb.gif"> icon. Your capsule will then be
+tracked to the nearest space station. You will only loose your
+cargo. You cash is saved and the insurance, that comes with your
+escape capsule will cover the ship itself and all the equipment you
+had installed on your ship.<p>
+
+Since your police record is tied to a unique marker on your ships
+hull, the replacement ship will cause your police record to be cleared.<p>
+
+Escape Capsules are available on planets with tech. level 6 or above for
+1000 Credits.
+
+<a name=bomb><h4>Energy Bomb</h4></a>
+
+This is the most powerful weapon you can equip your ship with. The
+energy bomb can used one time and will detroy all vessels, asteroids,
+missiles and other objects within the range of your ship, leaving your
+ship intact.<p>
+
+Energy bombs are available on planets with tech. level 7 or above for
+900 Credits.
+
+<a name=extraenergy><h4>Extra Energy Unit</h4></a>
+
+The extra energy unit fill speed up the rate, at which your energy
+banks are automatically refilled.<p>
+
+Extra Energy Units are available on planets with tech. level 8 or
+above for 1500 Credits.
+
+<a name=galactic><h4>Galactic Hyperdrive</h4></a>
+
+The galactic hyperdrive allows you to jump between galaxies. The
+galactic hyperdrive can only be used once using the <img
+src="but_ghyper.gif"> icon.<p>
+
+Galactic Hyperdrives are available on planets with tech. level 10 or
+above for 5000 Credits.
+
+</font>
+</td></tr></table>
+<font face="verdana, arial, helvetica, geneva">
+
+<h3>Short range and galactic chart</h3>
+
+<h3>Equipping the ship</h3>
+
+<h3>Equipping the ship</h3>
+
+</font>
+
+</body>
+</html>

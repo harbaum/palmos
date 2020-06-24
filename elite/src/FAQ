@@ -1,0 +1,99 @@
+These are some frequently asked questions about Elite for PalmOS.
+
+Q: Where's the PalmOS Elite web page?
+A: It may be moving around, but you should always be able to 
+   find it via http://www.harbaum.org/till/palm/elite
+
+Q: How close is this to the original elite?
+A: Very close. Some parts are even based on code disassembled from
+   the original elite.
+
+Q: I have difficulties reading the tiny font. Why didn't you use the 
+   bigger palm fonts?
+A: I had to squeeze the trading system, the equipment etc. which were
+   designed for a 320x200 screen into 160x160 pixels. I could have used
+   multiple screens, but i preferred the way it is now since it comes 
+   as close as possible to the original screen layout.
+
+Q: Will you make a version that runs on my Palm Personal, Palm III, 
+   old Visor, ...?
+A: I will very likely never make a version with 2bpp support (black, 
+   white + two levels of gray), which is necessary to make the game
+   run on very old 68328 based palms like the Palm Personal, 
+   Professonal and the Palm III (without x,e or c).
+   And since the game does not directly access the hardware (like
+   e.g. mulg does), it requires OS support for the video mode it's
+   using, which means that it requires at least PalmOS OS 3.3.
+
+Q: Why doesn't the game run on my PalmOS 2.x, 3.0 or 3.1 equipped 
+   machine?
+A: See last question.
+
+Q: Did you ask for permission to do this?
+A: Yes! I asked Ian Bell and Dave Braben, the original Elite authors
+   and Christian Pinder, who disassembled some of the original 
+   elite code.
+
+Q: What's your contribution to this? Didn't you just recompile the 
+   Elite NewKind code disassembled by Christian Pinder?
+A: Unfortunately it wasn't that easy. I replaced the whole 3d engine
+   with my own old "space" engine, i had to write a complete new set
+   of graphics functions for fast polygons, circles etc. and e.g.
+   support the tiny font. And lots of code had to be re-written to
+   cope with the palms memory layout, the lack of a file system,
+   the tiny screen, the digitizer input etc etc ...
+
+Q: Will you ever make a version that makes use of the 320x320 screen
+   of the sony clie?
+A: Maybe, but since i don't own such a beast, probably not soon.
+
+Q: I want to thank/support you, how can i do that?
+A: There are three things: 
+
+   a) I would love to get some of the original elite versions,
+      manuals, disk sets etc ... So if you have some Elite related
+      stuff you don't need anymore, please see the PalmOS Elite web
+      page for details on how to forward this stuff to me and to make
+      sure, that you aren't going to send me something i already
+      own. You might even get some cool t-shirt, mug or the like in
+      return.
+
+   b) Buy the PalmOS-Elite-T-Shirt, a mug or whatever cool stuff you
+      can buy via the PalmOS Elite web page.
+
+   c) Send me as much money you want. I don't own many palms and i
+      give my palm software away for free. Since it's only a hobby, i
+      don't spend all my money on new palms. This has the great
+      disadvantage, that the code is only tested on few machines and
+      that the game does not take advantage of additional hardware of
+      other machines (like e.g. rumble/vibration support on non m50x
+      palms, higher video resolutions, or special input devices like
+      scroll wheels and extra buttons).
+
+Q: A real Elite clone has to play the danube waltz during a computer
+   docking sequence. Can you change that?
+A: Probably not. The PalmOS sound support is very VERY bad and it's
+   not possible to play a song with the PalmOS sound routines while
+   the game is running. If you have some spare asynchronous 
+   sound/music routine for PalmOS that does not eat up all the CPU
+   time, then please contact me.
+
+Q: What's your favorite Elite version? 
+A: I have only seen the C64 and the Atari ST versions on the real
+   hardware and i really liked the game on my old Atari ST. But i
+   think the PalmOS version is my favorite :-)
+ 
+Q: Are there missions in the game?
+A: Yes! This Elite version is very close to the original BBC
+   version. Please try to find the Elite FAQ on the net for infos about this.
+
+Q: What does the "hoopy casino" setting mean?
+A: The planet info in elite is generated via a pseudo random generator.
+   This makes the planet data look random, but be 100% reproducable.
+   In the original elite game series, there were two major versions of 
+   this random number generator. One of them made Lave to be "famous
+   for its hoopy casinos". Hence the name of this random number generator. 
+
+Q: Your english is awful!
+A: I am not a native english speaker, feel free to improve my in-game
+   texts, manuals, readmes etc.
